@@ -1,0 +1,189 @@
+<div *ngIf="isShowForm">
+
+    <div class="p-grid">
+        <div class="p-col">
+            <h5>Nome</h5>
+            <span class="p-float-label">
+                <input id="float-nome" type="text" pInputText [(ngModel)]="parceiroEntity.nome"
+                    style="width:94%;">
+                <label for="float-nome">Nome</label>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
+            </span>
+        </div>
+        <div class="p-col-6">
+            <h5>E-mail</h5>
+            <span class="p-float-label">
+                <input id="float-email" type="text" pInputText [(ngModel)]="parceiroEntity.email"
+                    style="width:100%;">
+                <label for="float-email">E-mail</label>
+            </span>
+        </div>        
+    </div>
+
+    <div class="p-grid">
+
+        <div class="p-col-6">
+            <h5>Razão</h5>
+            <span class="p-float-label">
+                <input id="float-razao" type="text" pInputText [(ngModel)]="parceiroEntity.razao"
+                    style="width:100%;">
+                <label for="float-razao">Razão</label>
+            </span>
+        </div>        
+ 
+        <div class="p-col-6 p-md-3">
+            <h5>CNPJ</h5>
+            <span class="p-float-label">
+                <p-inputMask id="float-cnpj" [(ngModel)]="parceiroEntity.cnpj" mask="99.999.999/9999-99" slotChar=" "  [unmask]="true"></p-inputMask>
+                <label for="float-cnpj">CNPJ</label>
+            </span>
+        </div>
+        <div class="p-col-6 p-md-3">
+            <h5>Inscrição</h5>
+            <span class="p-float-label">
+                <p-inputMask id="float-inscricao" [(ngModel)]="parceiroEntity.inscricao" mask="999.9999.999-999" slotChar=" "  [unmask]="true"></p-inputMask>
+                <label for="float-cnpj">Inscrição</label>
+            </span>
+        </div>
+
+    </div>
+
+    <div class="p-grid">
+        <div class="p-col-2">
+            <h5>Telefone</h5>
+            <span class="p-float-label">
+                <p-inputMask id="float-fone" [(ngModel)]="parceiroEntity.fone" mask="(99)99999-9999" slotChar=" "  [unmask]="true"></p-inputMask>
+                <label for="float-fone">Telefone</label>
+            </span>
+        </div>        
+    
+        <div class="p-col-2">
+            <h5>Celular</h5>
+            <span class="p-float-label">
+                <p-inputMask id="float-celular" [(ngModel)]="parceiroEntity.celular" mask="(99)99999-9999" slotChar=" "  [unmask]="true"></p-inputMask>
+                <label for="float-celular">Celular</label>
+            </span>
+        </div>            
+        
+        <div class="p-col-2">
+            <h5>É WhatsApp</h5>
+            <span class="p-float-label">
+                <p-inputSwitch [(ngModel)]="parceiroEntity.celularIsWhatsApp"></p-inputSwitch>
+            </span>
+        </div>            
+
+        <div class="p-col-2">
+            <h5>Sexo</h5>
+            <p-dropdown [options]="lstSexo" [(ngModel)]="parceiroEntity.sexoId" placeholder="Select" optionLabel="nome" optionValue="id"></p-dropdown>
+        </div>   
+        <div class="p-col-6 p-md-2">
+            <h5>CPF</h5>
+            <span class="p-float-label">
+                <p-inputMask id="float-cpf" [(ngModel)]="parceiroEntity.cpf" mask="999.999.999-99" slotChar=" "  [unmask]="true"></p-inputMask>
+                <label for="float-cpf">CPF</label>
+            </span>
+        </div>
+        <div class="p-col-6 p-md-2">
+            <h5>Identidade</h5>
+            <span class="p-float-label">
+                <input id="float-identidade" type="text" pInputText [(ngModel)]="parceiroEntity.identidade">
+                <label for="float-cnpj">Identidade</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="p-grid">
+
+        <div class="p-col-6">
+            <h5>Contato</h5>
+            <span class="p-float-label">
+                <input id="float-contato" type="text" pInputText [(ngModel)]="parceiroEntity.contato" 
+                style="width:100%;">
+                <label for="float-contato">Contato</label>
+            </span>
+        </div>
+
+        <div class="p-col-2">
+            <h5>Fone Contato</h5>
+            <span class="p-float-label">
+                <p-inputMask id="float-foneContato" [(ngModel)]="parceiroEntity.foneContato" mask="(99)99999-9999" slotChar=" "  [unmask]="true"></p-inputMask>
+                <label for="float-foneContato">Fone Contato</label>
+            </span>
+        </div>            
+
+        <div class="p-col-2">
+            <h5>Celular do Contato</h5>
+            <span class="p-float-label">
+                <p-inputMask id="float-celularContato" [(ngModel)]="parceiroEntity.celularContato" mask="(99)99999-9999" slotChar=" "  [unmask]="true"></p-inputMask>
+                <label for="float-celularContato">Celular do Contato</label>
+            </span>
+        </div>            
+                    
+        <div class="p-col-2">
+            <h5>É WhatsApp</h5>
+            <span class="p-float-label">
+                <p-inputSwitch [(ngModel)]="parceiroEntity.celularContatoIsWhatsApp"></p-inputSwitch>
+            </span>
+            
+        </div>            
+
+
+    </div>    
+
+    <p-divider></p-divider>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button pButton icon="pi pi-plus"   Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
+        <button pButton icon="pi pi-check"  Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
+        <button pButton icon="pi pi-trash"  Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
+    </div>
+
+</div>
+
+<div *ngIf="isShowGrid" class="card">
+
+    <p-table #dt [value]="lstParceiros" [paginator]="true" [rows]="5" dataKey="id"
+        styleClass="p-datatable-gridlines"
+        [showCurrentPageReport]="true" 
+        currentPageReportTemplate="De {first} a {last} de {totalRecords}"
+        [rowsPerPageOptions]="[5,10,15,20,50]"
+        [globalFilterFields]="['nome','razao']">
+
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" [(ngModel)]="strFilter" (input)="dt.filterGlobal(applyFilterGlobal(), 'contains')" placeholder="Filter" />
+                </span>
+                <p-button type="button" icon="pi pi-search-minus" styleClass="p-button-outlined" (click)="doClear(dt)">
+                </p-button>                   
+                <p-button type="button" icon="pi pi-chevron-left" styleClass="p-button-outlined" (click)="doAlternarTela()">
+                </p-button>
+                <p-button type="button" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="doAtualizarPesquisa()">
+                </p-button>                   
+            </div>
+        </ng-template>        
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Razão</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Ação</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-parceiroItem>
+            <tr>
+                <td>{{parceiroItem.nome}}</td>
+                <td>{{parceiroItem.razao}}</td>
+                <td>{{parceiroItem.email}}</td>
+                <td>{{parceiroItem.fone | phonePipe }}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" Class="p-button-outlined" (click)="doSelecionarItem(parceiroItem)"></button>
+                    <button pButton pRipple icon="pi pi-trash" Class="p-button-outlined" (click)="doApagarItem(parceiroItem)"></button>
+                </td>                
+            </tr>
+        </ng-template>
+    </p-table>
+
+
+</div>

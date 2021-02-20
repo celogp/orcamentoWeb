@@ -1,0 +1,140 @@
+<div *ngIf="isShowForm">
+    <div class="p-grid">
+        <div class="p-col-fixed" style="width:300px">
+            <h5>Cep</h5>
+            <span class="p-float-label">
+                <p-inputMask id="float-cep" [(ngModel)]="localizacaoEntity.cep" mask="99-999-999" slotChar=" "  [unmask]="true"></p-inputMask>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
+                <button pButton pRipple icon="pi pi-globe" Class="p-button-outlined" (click)="doPesquisarCep()"></button>
+                <label for="float-cep">Cep</label>
+            </span>
+
+        </div>
+    </div>
+
+    <div class="p-grid">
+        <div class="p-col">
+            <h5>Logradouro</h5>
+            <span class="p-float-label">
+                <input id="float-logradouro" type="text" pInputText [(ngModel)]="localizacaoEntity.logradouro"
+                    style="width:100%;">
+                <label for="float-logradouro">Logradouro</label>
+            </span>
+        </div>
+        <div class="p-col">
+            <h5>Complemento</h5>
+            <span class="p-float-label">
+                <input id="float-complemento" type="text" pInputText [(ngModel)]="localizacaoEntity.complemento"
+                    style="width:100%;">
+                <label for="float-complemento">Complemento</label>
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="p-grid">
+        <div class="p-col">
+            <h5>Localidade</h5>
+            <span class="p-float-label">
+                <input id="float-localidade" type="text" pInputText [(ngModel)]="localizacaoEntity.localidade"
+                    style="width:100%;">
+                <label for="float-localidade">Localidade</label>
+            </span>
+        </div>
+        <div class="p-col">
+            <h5>Bairro</h5>
+            <span class="p-float-label">
+                <input id="float-bairro" type="text" pInputText [(ngModel)]="localizacaoEntity.bairro"
+                    style="width:100%;">
+                <label for="float-bairro">Bairro</label>
+            </span>
+
+        </div>
+    </div>
+
+    <div class="p-grid">
+        <div class="p-col-12 p-md-6">
+            <h5>Uf</h5>
+            <p-dropdown [options]="lstUfs" [(ngModel)]="localizacaoEntity.ufId" placeholder="Select" optionLabel="nome" optionValue="id"></p-dropdown>
+        </div>
+
+        <div class="p-col-6 p-md-3">
+            <h5>Longitude</h5>
+            <span class="p-float-label">
+                <input id="float-longitude" type="text" pInputText [(ngModel)]="localizacaoEntity.longitude">
+                <label for="float-longitude">Longitude</label>
+            </span>
+            
+        </div>
+
+        <div class="p-col-6 p-md-3">
+            <h5>Latitude</h5>
+            <span class="p-float-label">
+                <input id="float-latitude" type="text" pInputText [(ngModel)]="localizacaoEntity.latitude">
+                <label for="float-latitude">Latitude</label>
+            </span>
+        </div>
+
+    </div>
+
+    <p-divider></p-divider>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button pButton icon="pi pi-plus"   Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
+        <button pButton icon="pi pi-check"  Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
+        <button pButton icon="pi pi-trash"  Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
+    </div>
+</div>
+
+
+<div *ngIf="isShowGrid" class="card">
+
+    <p-table #dt [value]="lstLocalizacoes" [paginator]="true" [rows]="5" dataKey="id"
+        styleClass="p-datatable-gridlines"
+        [showCurrentPageReport]="true" 
+        currentPageReportTemplate="De {first} a {last} de {totalRecords}"
+        [rowsPerPageOptions]="[5,10,15,20,50]"
+        [globalFilterFields]="['cep','logradouro','localidade','bairro', 'uf.nome', 'uf.sigla']">
+
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" [(ngModel)]="strFilter" (input)="dt.filterGlobal(applyFilterGlobal(), 'contains')" placeholder="Filter" />
+                </span>
+                <p-button type="button" icon="pi pi-search-minus" styleClass="p-button-outlined" (click)="doClear(dt)">
+                </p-button>                   
+                <p-button type="button" icon="pi pi-chevron-left" styleClass="p-button-outlined" (click)="doAlternarTela()">
+                </p-button>
+                <p-button type="button" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="doAtualizarPesquisa()">
+                </p-button>                   
+            </div>
+        </ng-template>        
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Cep</th>
+                <th>Logradouro</th>
+                <th>Localidade</th>
+                <th>Bairro</th>
+                <th>Uf</th>
+                <th>Sigla Uf</th>
+                <th>Ação</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-localizacaoItem>
+            <tr>
+                <td>{{ localizacaoItem.cep  | cepPipe }}</td>
+                <td>{{localizacaoItem.logradouro}}</td>
+                <td>{{localizacaoItem.localidade}}</td>
+                <td>{{localizacaoItem.bairro}}</td>
+                <td>{{localizacaoItem.uf.nome}}</td>
+                <td>{{localizacaoItem.uf.sigla}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" Class="p-button-outlined" (click)="doSelecionarItem(localizacaoItem)"></button>
+                    <button pButton pRipple icon="pi pi-trash" Class="p-button-outlined" (click)="doApagarItem(localizacaoItem)"></button>
+                </td>                
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>
