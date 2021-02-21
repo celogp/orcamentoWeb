@@ -1,1 +1,79 @@
-<p>financeiro works!</p>
+<div *ngIf="isShowForm">
+    <p>colocar o formulario da receita aqui...</p>
+
+    <div class="p-grid">
+        <div class="p-col-1">
+            <h5>Receita</h5>
+            <span class="p-float-label">
+                <p-inputSwitch [(ngModel)]="financeiroEntity.recDesp"></p-inputSwitch>
+            </span>
+        </div>
+        <div class="p-col-11">
+            <h5>Id Parceiro</h5>
+            <span class="p-float-label">
+                <input id="float-idparceiro" type="text" pInputText [(ngModel)]="financeiroEntity.parceiroId">
+                <label for="float-idparceiro">Id Parceiro</label>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
+
+                <input id="float-parceiro" type="text" pInputText [(ngModel)]="nomeParceiro"
+                style="width:79%;">
+    
+            </span>
+    
+        </div>
+
+    </div>
+    <div class="p-grid">
+        <div class="p-col-2">
+            <h5>Dt.Movimento</h5>
+            <span class="p-float-label">
+                <input id="float-movimento" type="date" pInputText [(ngModel)]="financeiroEntity.dtMovimento">
+            </span>
+        </div> 
+        <div class="p-col-2">
+            <h5>Dt.Vencimento</h5>
+            <span class="p-float-label">
+                <input id="float-vencimento" type="date" pInputText [(ngModel)]="financeiroEntity.dtVencimento">
+            </span>
+        </div> 
+        <div class="p-col-8">
+            <h5>Histórico</h5>
+            <span class="p-float-label">
+                <input id="float-historico" type="text" pInputText [(ngModel)]="financeiroEntity.historico"
+                style="width:97%;">
+                <label for="float-historico">Histórico</label>
+            </span>
+        </div>
+
+    </div>
+
+    <div class="p-grid">
+
+        <div class="p-col-2">
+            <h5>Valor</h5>
+            <span class="p-float-label">
+                <input id="float-valor" type="text" pInputText [(ngModel)]="financeiroEntity.historico">
+                <label for="float-valor">Valor</label>
+            </span>
+        </div>
+        <div class="p-col-2">
+            <h5>Baixado</h5>
+            <span class="p-float-label">
+                <p-inputSwitch [(ngModel)]="financeiroEntity.baixado"></p-inputSwitch>
+            </span>
+        </div>
+
+    </div>
+
+</div>
+<div *ngIf="isShowGrid" class="card">
+    <p>colocar a grade de pesquisa da receita aqui...</p>
+</div>
+
+
+<p-divider></p-divider>
+<div class="ui-dialog-buttonpane ui-helper-clearfix">
+    <button pButton icon="pi pi-plus" Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
+    <button pButton icon="pi pi-check" Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
+    <button pButton icon="pi pi-trash" Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
+</div>

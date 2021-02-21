@@ -5,6 +5,10 @@ import { SexoEntity } from '../entidades/SexoEntity';
 import { utilService } from '../utils/util.servico';
 import { parceiroServico } from './parceiro.servico';
 
+/*
+  Falta fazer a pesquisa do endereço.
+*/
+
 @Component({
   selector: 'app-parceiro',
   templateUrl: './parceiro.component.html',

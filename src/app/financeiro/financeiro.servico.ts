@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { CFG_URLAPI } from "../app.config";
+import { FinanceiroBaixaEntity } from "../entidades/FinanceiroBaixaEntity";
 import { FinanceiroEntity } from "../entidades/FinanceiroEntity";
 import { ObjetoResposta } from "../response/objectResponse";
 
@@ -34,4 +35,17 @@ export class financeiroServico {
         this.httpOptions.params = _params;
        return this.http.delete<ObjetoResposta>(this.FinanceiroUrl + 'doApagar', this.httpOptions);
     }
+
+    public doBaixar(_entity: FinanceiroEntity) {
+        let _financeiroBaixa = new FinanceiroBaixaEntity(_entity.id, _entity.dtBaixa);
+       return this.http.put<ObjetoResposta>(this.FinanceiroUrl + 'doEstornarBaixa', _financeiroBaixa, this.httpOptions);
+    }
+
+    public doEstornarBaixa(_entity: FinanceiroEntity) {
+        let _params = new HttpParams();
+        _params=_params.append('id', _entity.id.toString());
+        this.httpOptions.params = _params;
+       return this.http.delete<ObjetoResposta>(this.FinanceiroUrl + 'doEstornarBaixa', this.httpOptions);
+    }
+
 }

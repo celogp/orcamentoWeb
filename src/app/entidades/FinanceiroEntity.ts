@@ -9,5 +9,5 @@ export class FinanceiroEntity{
     dtBaixa?:Date;
     historico:string="";
     vlrFinanceiro:number=0;
-    vlrBaixa:number=0;
+    baixado:boolean=false;
 }

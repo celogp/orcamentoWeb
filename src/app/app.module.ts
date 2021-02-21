@@ -27,6 +27,7 @@ import { utilService } from './utils/util.servico';
 import { PhonePipe } from './pipes/phonepipe';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
 import { financeiroServico } from './financeiro/financeiro.servico';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { financeiroServico } from './financeiro/financeiro.servico';
     HttpClientModule,
     ButtonModule, 
     ToolbarModule, 
-    DropdownModule
+    DropdownModule, 
+    TabViewModule
   ],
   providers: [MessageService, utilService, localizacaoServico, parceiroServico, financeiroServico],
   bootstrap: [AppComponent]

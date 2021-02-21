@@ -4,6 +4,7 @@ import { FinanceiroEntity } from '../entidades/FinanceiroEntity';
 import { utilService } from '../utils/util.servico';
 import { financeiroServico } from './financeiro.servico';
 
+
 @Component({
   selector: 'app-financeiro',
   templateUrl: './financeiro.component.html',
@@ -15,7 +16,7 @@ export class FinanceiroComponent implements OnInit {
 
   isShowGrid: boolean = false;
   isShowForm: boolean = true;
-
+  nomeParceiro : string=""
   strFilter:string='';
 
   constructor(private _utilService: utilService, 
