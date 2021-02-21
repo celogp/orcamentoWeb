@@ -1,11 +1,10 @@
 <div *ngIf="isShowForm">
-    <p>colocar o formulario da receita aqui...</p>
 
     <div class="p-grid">
         <div class="p-col-1">
             <h5>Receita</h5>
             <span class="p-float-label">
-                <p-inputSwitch [(ngModel)]="financeiroEntity.recDesp"></p-inputSwitch>
+                <p-inputSwitch [(ngModel)]="financeiroEntity.recdesp"></p-inputSwitch>
             </span>
         </div>
         <div class="p-col-11">
@@ -79,10 +78,10 @@
 </div>
 <div *ngIf="isShowGrid" class="card">
     <p>colocar a grade de pesquisa da receita aqui...</p>
-    <p-table #dt [value]="lstLocalizacoes" [paginator]="true" [rows]="5" dataKey="id" styleClass="p-datatable-gridlines"
+    <p-table #dt [value]="lstFinanceiros" [paginator]="true" [rows]="5" dataKey="id" styleClass="p-datatable-gridlines"
         [showCurrentPageReport]="true" currentPageReportTemplate="De {first} a {last} de {totalRecords}"
         [rowsPerPageOptions]="[5,10,15,20,50]"
-        [globalFilterFields]="['cep','logradouro','localidade','bairro', 'uf.nome', 'uf.sigla']">
+        [globalFilterFields]="['Parceiro','Historico','dtVencimento','dtMovimento']">
 
         <ng-template pTemplate="caption">
             <div class="p-d-flex">
@@ -113,7 +112,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-financeiroItem>
             <tr>
-                <td>{{financeiroItem.receita}}</td>
+                <td>{{financeiroItem.recdesp}}</td>
                 <td>{{financeiroItem.parceiroId}}</td>
                 <td>{{financeiroItem.dtVencimento}}</td>
                 <td>{{financeiroItem.dtBaixa}}</td>
