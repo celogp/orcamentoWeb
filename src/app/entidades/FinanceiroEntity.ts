@@ -1,13 +1,11 @@
-import { NodeWithI18n } from "@angular/compiler";
-
 export class FinanceiroEntity{
     id: number=0;
-    recDesp: number=0;
+    receita: boolean=true;
     parceiroId: number=0; 
-    dtMovimento?:Date;
-    dtVencimento?:Date;
-    dtBaixa?:Date;
+    dtMovimento:string="";
+    dtVencimento:string="";
+    dtBaixa: string="";
     historico:string="";
     vlrFinanceiro:number=0;
-    baixado:boolean=false;
+    pendente:boolean=false;
 }

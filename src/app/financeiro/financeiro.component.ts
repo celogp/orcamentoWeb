@@ -3,7 +3,7 @@ import { Table } from 'primeng/table';
 import { FinanceiroEntity } from '../entidades/FinanceiroEntity';
 import { utilService } from '../utils/util.servico';
 import { financeiroServico } from './financeiro.servico';
-
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-financeiro',
@@ -20,7 +20,9 @@ export class FinanceiroComponent implements OnInit {
   strFilter:string='';
 
   constructor(private _utilService: utilService, 
-    private _financeiroServico : financeiroServico) { }
+    private _financeiroServico : financeiroServico) { 
+      
+    }
 
   ngOnInit(): void {
     this.financeiroEntity.id = 0;
@@ -46,6 +48,8 @@ export class FinanceiroComponent implements OnInit {
 
   doSelecionarItem(ItemFinanceiroEntity: FinanceiroEntity) {
     this.financeiroEntity = ItemFinanceiroEntity;
+    this.financeiroEntity.dtBaixa = parseISO(ItemFinanceiroEntity.dtBaixa).toString();
+    console.log('parse da data ' + this.financeiroEntity.dtBaixa);
     this.doAlternarTela();
   }  
 
@@ -61,6 +65,15 @@ export class FinanceiroComponent implements OnInit {
           //console.log('this complet');
         }
       );
+  }
+
+  handleChange(e:any): void {
+    let dateHoje = new Date();
+    if (e.checked){
+      this.financeiroEntity.dtBaixa = "";
+    }else{
+      this.financeiroEntity.dtBaixa = format(dateHoje, 'yyyy-MM-dd');
+    }
   }
 
   doAdicionar(): void {

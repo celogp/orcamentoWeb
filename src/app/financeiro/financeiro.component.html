@@ -2,9 +2,9 @@
 
     <div class="p-grid">
         <div class="p-col-1">
-            <h5>Receita</h5>
+            <h5>É Receita</h5>
             <span class="p-float-label">
-                <p-inputSwitch [(ngModel)]="financeiroEntity.recdesp"></p-inputSwitch>
+                <p-inputSwitch [(ngModel)]="financeiroEntity.receita"></p-inputSwitch>
             </span>
         </div>
         <div class="p-col-11">
@@ -55,15 +55,15 @@
             </span>
         </div>
         <div class="p-col-2">
-            <h5>Baixado</h5>
+            <h5>É Pendente</h5>
             <span class="p-float-label">
-                <p-inputSwitch [(ngModel)]="financeiroEntity.baixado"></p-inputSwitch>
+                <p-inputSwitch [(ngModel)]="financeiroEntity.pendente" (onChange)="handleChange($event)" ></p-inputSwitch>
             </span>
         </div>
         <div class="p-col-2">
             <h5>Dt.Baixa</h5>
             <span class="p-float-label">
-                <input id="float-vencimento" type="date" pInputText [(ngModel)]="financeiroEntity.dtBaixa">
+                <input id="float-vencimento" type="date" pInputText [(ngModel)]="financeiroEntity.dtBaixa" disabled>
             </span>
         </div>
 
@@ -77,7 +77,6 @@
     </div>
 </div>
 <div *ngIf="isShowGrid" class="card">
-    <p>colocar a grade de pesquisa da receita aqui...</p>
     <p-table #dt [value]="lstFinanceiros" [paginator]="true" [rows]="5" dataKey="id" styleClass="p-datatable-gridlines"
         [showCurrentPageReport]="true" currentPageReportTemplate="De {first} a {last} de {totalRecords}"
         [rowsPerPageOptions]="[5,10,15,20,50]"
@@ -102,7 +101,7 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th>Receita</th>
+                <th>É Receita</th>
                 <th>Parceiro</th>
                 <th>Dt.Vencimento</th>
                 <th>Dt.Baixa</th>
@@ -112,10 +111,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-financeiroItem>
             <tr>
-                <td>{{financeiroItem.recdesp}}</td>
+                <td>{{financeiroItem.receita}}</td>
                 <td>{{financeiroItem.parceiroId}}</td>
-                <td>{{financeiroItem.dtVencimento}}</td>
-                <td>{{financeiroItem.dtBaixa}}</td>
+                <td>{{financeiroItem.dtVencimento | date: "dd/MM/yyyy" }}</td>
+                <td>{{financeiroItem.dtBaixa | date: "dd/MM/yyyy" }}</td>
                 <td>{{financeiroItem.vlrFinanceiro}}</td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" Class="p-button-outlined"

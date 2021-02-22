@@ -1,10 +1,8 @@
-import { NodeWithI18n } from "@angular/compiler";
-
 export class FinanceiroBaixaEntity{
     id: number=0;
-    dtBaixa?:Date;
+    dtBaixa:String;
 
-    constructor(id:number, dtBaixa:any) {
+    constructor(id:number, dtBaixa:String) {
         this.id=id;
         this.dtBaixa = dtBaixa;
     }
