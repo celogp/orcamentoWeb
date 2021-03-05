@@ -1,0 +1,50 @@
+<div class="card">
+
+    <p-table #dt [value]="lstLocalizacoes" [paginator]="true" [rows]="5" dataKey="id"
+        styleClass="p-datatable-gridlines"
+        [showCurrentPageReport]="true" 
+        currentPageReportTemplate="De {first} a {last} de {totalRecords}"
+        [rowsPerPageOptions]="[5,10,15,20,50]"
+        [globalFilterFields]="['cep','logradouro','localidade','bairro', 'uf.nome', 'uf.sigla']">
+
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" [(ngModel)]="strFilter" (input)="dt.filterGlobal(applyFilterGlobal(), 'contains')" placeholder="Filter" />
+                </span>
+                <p-button type="button" icon="pi pi-search-minus" styleClass="p-button-outlined" (click)="doClear(dt)">
+                </p-button>                   
+                <p-button type="button" icon="pi pi-chevron-left" styleClass="p-button-outlined" (click)="doShowGridChanged()">
+                </p-button>
+                <p-button type="button" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="doAtualizarPesquisa()">
+                </p-button>                   
+            </div>
+        </ng-template>        
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Cep</th>
+                <th>Logradouro</th>
+                <th>Localidade</th>
+                <th>Bairro</th>
+                <th>Uf</th>
+                <th>Sigla Uf</th>
+                <th>Ação</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-localizacaoItem>
+            <tr>
+                <td>{{ localizacaoItem.cep  | cepPipe }}</td>
+                <td>{{localizacaoItem.logradouro}}</td>
+                <td>{{localizacaoItem.localidade}}</td>
+                <td>{{localizacaoItem.bairro}}</td>
+                <td>{{localizacaoItem.uf.nome}}</td>
+                <td>{{localizacaoItem.uf.sigla}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" Class="p-button-outlined" (click)="doSelecionarItem(localizacaoItem)"></button>
+                </td>                
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

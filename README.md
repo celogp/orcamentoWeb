@@ -26,6 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Integração com API VIACEP para busca de Cep's.
 
 ## Telas básicas em desenvolvimento usando componentes do primafaces
 ![](https://github.com/celogp/orcamentoWeb/blob/master/screens/MenuBasico.PNG)
@@ -35,3 +36,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ![](https://github.com/celogp/orcamentoWeb/blob/master/screens/ConsultaParceiros.PNG)
 
 ![](https://github.com/celogp/orcamentoWeb/blob/master/screens/CrudFinanceiroBasico.PNG)
+
+## Componentes extras
+## https://github.com/cesarrew/ng2-currency-mask
+    npm install ng2-currency-mask --save
+
+<!-- example for pt-BR money -->
+## https://github.com/nbfontana/ngx-currency

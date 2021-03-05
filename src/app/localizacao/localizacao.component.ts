@@ -5,23 +5,18 @@ import { UfEntity } from '../entidades/UfsEntity';
 import { utilService } from '../utils/util.servico';
 import { localizacaoServico } from './localizacao.servico';
 
-
 @Component({
   selector: 'app-localizacao',
   templateUrl: './localizacao.component.html',
   styleUrls: ['./localizacao.component.css']
 })
 
-
 export class LocalizacaoComponent implements OnInit {
 
   localizacaoEntity = new LocalizacaoEntity();
-  lstLocalizacoes = new Array<LocalizacaoEntity>();
   lstUfs = new Array<UfEntity>();
 
-  isShowGrid: boolean = false;
   isShowForm: boolean = true;
-  strFilter:string='';
 
   constructor(
     private _utilService: utilService, 
@@ -30,12 +25,19 @@ export class LocalizacaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.localizacaoEntity.id = 0;
-    this.doAtualizarPesquisa();
     this.doGetUfs();
   }
 
   ngOnDestroy() {
     //console.log('this pass to destroy...');
+  }
+
+  displayLocalizacao(_localizacaoEntity:any) {
+    this.localizacaoEntity = _localizacaoEntity;
+  }
+
+  doChangeTela(showGrid:any) {
+    this.isShowForm = (showGrid == true ? false : true);
   }
 
   doGetUfs() {
@@ -45,25 +47,6 @@ export class LocalizacaoComponent implements OnInit {
       },
         (errorResponse) => {
           this._utilService.doApresentaMensagens(errorResponse.error.mensagens,'error');
-        },
-        () => {
-          //console.log('this complet');
-        }
-      );
-  }
-
-  doSelecionarItem(ItemLocalizacaoEntity: LocalizacaoEntity) {
-    this.localizacaoEntity = ItemLocalizacaoEntity;
-    this.doAlternarTela();
-  }
-
-  doAtualizarPesquisa() {
-    this._localizacaoServico.doGetLocalizacoes()
-      .subscribe((response) => {
-        this.lstLocalizacoes = response.data;
-      },
-        () => {
-          //console.log(error);
         },
         () => {
           //console.log('this complet');
@@ -147,22 +130,4 @@ export class LocalizacaoComponent implements OnInit {
         }
       );
   }
-
-  doPesquisar(): void {
-    this.doAlternarTela();
-  }
-
-  doAlternarTela(): void {
-    this.isShowGrid = (this.isShowGrid == true ? false : true);
-    this.isShowForm = (this.isShowForm == true ? false : true);
-  }
-
-  doClear(table: Table) {
-    table.clear();
-  }
-
-  applyFilterGlobal() : string{
-    return this.strFilter;
-  }
-
 }

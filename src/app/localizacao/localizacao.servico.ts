@@ -22,12 +22,10 @@ export class localizacaoServico {
     constructor(private http: HttpClient) { }
 
     public doGetUfs() {
-        console.info('httpoptions => ', this.httpOptions);
         return this.http.get<ObjetoResposta>(this.PesquisasUrl + 'doObterUfs');
     }
 
     public doGetLocalizacoes() {
-        console.info('httpoptions => ', this.httpOptions);
         return this.http.get<ObjetoResposta>(this.LocalizacaoUrl + 'doObterTodos');
     }
 
@@ -67,7 +65,6 @@ export class localizacaoServico {
         } else {
             message = `Error Code: ${err.status}\nMessage: ${err.message}`;
         }
-        console.log(message);
         return throwError(message);
     }
 }

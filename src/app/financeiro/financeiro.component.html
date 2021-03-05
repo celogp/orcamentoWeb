@@ -6,16 +6,23 @@
             <span class="p-float-label">
                 <p-inputSwitch [(ngModel)]="financeiroEntity.receita"></p-inputSwitch>
             </span>
+        </div>        
+        <div class="p-col-2">
+            <h5>Nro.Documento</h5>
+            <span class="p-float-label">
+                <input id="float-nrodocumento" type="text" pInputText [(ngModel)]="financeiroEntity.nroDocumento" style="width:80%;" >
+                <label for="float-nrodocumento">Nro.Documento</label>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
+            </span>
+
         </div>
-        <div class="p-col-11">
+        <div class="p-col-9">
             <h5>Id Parceiro</h5>
             <span class="p-float-label">
                 <input id="float-idparceiro" type="text" pInputText [(ngModel)]="financeiroEntity.parceiroId">
                 <label for="float-idparceiro">Id Parceiro</label>
                 <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
-
-                <input id="float-parceiro" type="text" pInputText [(ngModel)]="nomeParceiro" style="width:79%;">
-
+                <input id="float-parceiro" type="text" pInputText [(ngModel)]="nomeParceiro" style="width:75%;" disabled>
             </span>
 
         </div>
@@ -50,9 +57,10 @@
         <div class="p-col-2">
             <h5>Valor</h5>
             <span class="p-float-label">
-                <input id="float-valor" type="text" pInputText [(ngModel)]="financeiroEntity.vlrFinanceiro">
+                <p-inputNumber [(ngModel)]="financeiroEntity.vlrFinanceiro" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>                
                 <label for="float-valor">Valor</label>
             </span>
+
         </div>
         <div class="p-col-2">
             <h5>É Pendente</h5>
@@ -63,7 +71,7 @@
         <div class="p-col-2">
             <h5>Dt.Baixa</h5>
             <span class="p-float-label">
-                <input id="float-vencimento" type="date" pInputText [(ngModel)]="financeiroEntity.dtBaixa" disabled>
+                <input id="float-baixa" type="date" pInputText [(ngModel)]="financeiroEntity.dtBaixa" disabled>
             </span>
         </div>
 
@@ -80,7 +88,7 @@
     <p-table #dt [value]="lstFinanceiros" [paginator]="true" [rows]="5" dataKey="id" styleClass="p-datatable-gridlines"
         [showCurrentPageReport]="true" currentPageReportTemplate="De {first} a {last} de {totalRecords}"
         [rowsPerPageOptions]="[5,10,15,20,50]"
-        [globalFilterFields]="['Parceiro','Historico','dtVencimento','dtMovimento']">
+        [globalFilterFields]="['nomeParceiro','Historico','dtVencimento','dtMovimento']">
 
         <ng-template pTemplate="caption">
             <div class="p-d-flex">
@@ -111,11 +119,11 @@
         </ng-template>
         <ng-template pTemplate="body" let-financeiroItem>
             <tr>
-                <td>{{financeiroItem.receita}}</td>
-                <td>{{financeiroItem.parceiroId}}</td>
+                <td>{{financeiroItem.receita | simnaoPipe}}</td>
+                <td>{{financeiroItem.parceiro.nome}}</td>
                 <td>{{financeiroItem.dtVencimento | date: "dd/MM/yyyy" }}</td>
                 <td>{{financeiroItem.dtBaixa | date: "dd/MM/yyyy" }}</td>
-                <td>{{financeiroItem.vlrFinanceiro}}</td>
+                <td>{{financeiroItem.vlrFinanceiro | currency:'BRL' }}</td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" Class="p-button-outlined"
                         (click)="doSelecionarItem(financeiroItem)"></button>

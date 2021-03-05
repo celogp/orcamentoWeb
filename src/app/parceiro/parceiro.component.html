@@ -1,4 +1,4 @@
-<div *ngIf="isShowForm">
+<div *ngIf="isShowForm; else elseBlock">
 
     <div class="p-grid">
         <div class="p-col">
@@ -7,7 +7,7 @@
                 <input id="float-nome" type="text" pInputText [(ngModel)]="parceiroEntity.nome"
                     style="width:94%;">
                 <label for="float-nome">Nome</label>
-                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTela(true)"></button>
             </span>
         </div>
         <div class="p-col-6">
@@ -19,6 +19,45 @@
             </span>
         </div>        
     </div>
+
+        <div class="p-grid">
+            <div class="p-col-3">
+                <h5>Cep</h5>
+                <span class="p-float-label">
+                    <p-inputMask id="float-cep" [(ngModel)]="cep" mask="99-999-999" slotChar=" "  [unmask]="true" ></p-inputMask>
+                    <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaLocalizacao()" ></button>
+                    <label for="float-cep">Cep</label>
+                </span>
+            </div>
+
+            <div class="p-col-3">
+                <h5>Logradouro</h5>
+                <span class="p-float-label">
+                    <input id="float-logradouro" type="text" pInputText [(ngModel)]="logradouro"
+                        style="width:100%;" disabled>
+                    <label for="float-logradouro">Logradouro</label>
+                </span>
+            </div>
+
+            <div class="p-col-3">
+                <h5>Localidade</h5>
+                <span class="p-float-label">
+                    <input id="float-localidade" type="text" pInputText [(ngModel)]="localidade"
+                        style="width:100%;" disabled>
+                    <label for="float-localidade">Localidade</label>
+                </span>
+            </div>
+            <div class="p-col-3">
+                <h5>Bairro</h5>
+                <span class="p-float-label">
+                    <input id="float-bairro" type="text" pInputText [(ngModel)]="bairro"
+                        style="width:100%;" disabled>
+                    <label for="float-bairro">Bairro</label>
+                </span>
+    
+            </div>            
+
+        </div>
 
     <div class="p-grid">
 
@@ -127,7 +166,6 @@
             
         </div>            
 
-
     </div>    
 
     <p-divider></p-divider>
@@ -139,51 +177,18 @@
 
 </div>
 
-<div *ngIf="isShowGrid" class="card">
+<ng-template  #elseBlock>
+    <div *ngIf="isShowGrid; else elseBlock">
+        <app-parceiro-lista 
+        (isShowGridChange)='doChangeTela($event)'
+        (parceiroEntityChange)='displayParceiro($event)'
+        ></app-parceiro-lista>
+    </div>
+    <div *ngIf="isShowGridCep; else elseBlock">
+        <app-localizacao-lista 
+        (isShowGridChange)='doChangeTela($event)'
+        (localizacaoEntityChange)='displayLocalizacao($event)'
+        ></app-localizacao-lista>
 
-    <p-table #dt [value]="lstParceiros" [paginator]="true" [rows]="5" dataKey="id"
-        styleClass="p-datatable-gridlines"
-        [showCurrentPageReport]="true" 
-        currentPageReportTemplate="De {first} a {last} de {totalRecords}"
-        [rowsPerPageOptions]="[5,10,15,20,50]"
-        [globalFilterFields]="['nome','razao']">
-
-        <ng-template pTemplate="caption">
-            <div class="p-d-flex">
-                <span class="p-input-icon-left p-ml-auto">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" [(ngModel)]="strFilter" (input)="dt.filterGlobal(applyFilterGlobal(), 'contains')" placeholder="Filter" />
-                </span>
-                <p-button type="button" icon="pi pi-search-minus" styleClass="p-button-outlined" (click)="doClear(dt)">
-                </p-button>                   
-                <p-button type="button" icon="pi pi-chevron-left" styleClass="p-button-outlined" (click)="doAlternarTela()">
-                </p-button>
-                <p-button type="button" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="doAtualizarPesquisa()">
-                </p-button>                   
-            </div>
-        </ng-template>        
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Nome</th>
-                <th>Razão</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
-                <th>Ação</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-parceiroItem>
-            <tr>
-                <td>{{parceiroItem.nome}}</td>
-                <td>{{parceiroItem.razao}}</td>
-                <td>{{parceiroItem.email}}</td>
-                <td>{{parceiroItem.fone | phonePipe }}</td>
-                <td>
-                    <button pButton pRipple icon="pi pi-pencil" Class="p-button-outlined" (click)="doSelecionarItem(parceiroItem)"></button>
-                    <button pButton pRipple icon="pi pi-trash" Class="p-button-outlined" (click)="doApagarItem(parceiroItem)"></button>
-                </td>                
-            </tr>
-        </ng-template>
-    </p-table>
-
-
-</div>
+    </div>
+</ng-template>

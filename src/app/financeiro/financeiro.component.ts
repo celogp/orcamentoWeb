@@ -3,7 +3,8 @@ import { Table } from 'primeng/table';
 import { FinanceiroEntity } from '../entidades/FinanceiroEntity';
 import { utilService } from '../utils/util.servico';
 import { financeiroServico } from './financeiro.servico';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
+import { FinanceiroLst } from '../entidades/FinanceiroLst';
 
 @Component({
   selector: 'app-financeiro',
@@ -12,7 +13,7 @@ import { format, parseISO } from 'date-fns';
 })
 export class FinanceiroComponent implements OnInit {
   financeiroEntity = new FinanceiroEntity();
-  lstFinanceiros = new Array<FinanceiroEntity>();
+  lstFinanceiros = new Array<FinanceiroLst>();
 
   isShowGrid: boolean = false;
   isShowForm: boolean = true;
@@ -26,6 +27,7 @@ export class FinanceiroComponent implements OnInit {
 
   ngOnInit(): void {
     this.financeiroEntity.id = 0;
+    this.financeiroEntity.pendente = true;
     this.doAtualizarPesquisa();
   }
 
@@ -46,10 +48,10 @@ export class FinanceiroComponent implements OnInit {
     this.doAlternarTela();
   }
 
-  doSelecionarItem(ItemFinanceiroEntity: FinanceiroEntity) {
-    this.financeiroEntity = ItemFinanceiroEntity;
-    this.financeiroEntity.dtBaixa = parseISO(ItemFinanceiroEntity.dtBaixa).toString();
-    console.log('parse da data ' + this.financeiroEntity.dtBaixa);
+  doSelecionarItem(ItemFinanceiro: any) {
+    this.financeiroEntity = ItemFinanceiro;
+    this.nomeParceiro = ItemFinanceiro.parceiro.nome;
+    console.log(this.lstFinanceiros, ItemFinanceiro.parceiro.nome);
     this.doAlternarTela();
   }  
 

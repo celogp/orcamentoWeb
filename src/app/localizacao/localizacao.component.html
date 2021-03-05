@@ -1,10 +1,10 @@
-<div *ngIf="isShowForm">
+<div *ngIf="isShowForm; else elseBlock">
     <div class="p-grid">
         <div class="p-col-fixed" style="width:300px">
             <h5>Cep</h5>
             <span class="p-float-label">
                 <p-inputMask id="float-cep" [(ngModel)]="localizacaoEntity.cep" mask="99-999-999" slotChar=" "  [unmask]="true"></p-inputMask>
-                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTela(true)"></button>
                 <button pButton pRipple icon="pi pi-globe" Class="p-button-outlined" (click)="doPesquisarCep()"></button>
                 <label for="float-cep">Cep</label>
             </span>
@@ -86,55 +86,9 @@
     </div>
 </div>
 
-
-<div *ngIf="isShowGrid" class="card">
-
-    <p-table #dt [value]="lstLocalizacoes" [paginator]="true" [rows]="5" dataKey="id"
-        styleClass="p-datatable-gridlines"
-        [showCurrentPageReport]="true" 
-        currentPageReportTemplate="De {first} a {last} de {totalRecords}"
-        [rowsPerPageOptions]="[5,10,15,20,50]"
-        [globalFilterFields]="['cep','logradouro','localidade','bairro', 'uf.nome', 'uf.sigla']">
-
-        <ng-template pTemplate="caption">
-            <div class="p-d-flex">
-                <span class="p-input-icon-left p-ml-auto">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" [(ngModel)]="strFilter" (input)="dt.filterGlobal(applyFilterGlobal(), 'contains')" placeholder="Filter" />
-                </span>
-                <p-button type="button" icon="pi pi-search-minus" styleClass="p-button-outlined" (click)="doClear(dt)">
-                </p-button>                   
-                <p-button type="button" icon="pi pi-chevron-left" styleClass="p-button-outlined" (click)="doAlternarTela()">
-                </p-button>
-                <p-button type="button" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="doAtualizarPesquisa()">
-                </p-button>                   
-            </div>
-        </ng-template>        
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Cep</th>
-                <th>Logradouro</th>
-                <th>Localidade</th>
-                <th>Bairro</th>
-                <th>Uf</th>
-                <th>Sigla Uf</th>
-                <th>Ação</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-localizacaoItem>
-            <tr>
-                <td>{{ localizacaoItem.cep  | cepPipe }}</td>
-                <td>{{localizacaoItem.logradouro}}</td>
-                <td>{{localizacaoItem.localidade}}</td>
-                <td>{{localizacaoItem.bairro}}</td>
-                <td>{{localizacaoItem.uf.nome}}</td>
-                <td>{{localizacaoItem.uf.sigla}}</td>
-                <td>
-                    <button pButton pRipple icon="pi pi-pencil" Class="p-button-outlined" (click)="doSelecionarItem(localizacaoItem)"></button>
-                    <button pButton pRipple icon="pi pi-trash" Class="p-button-outlined" (click)="doApagarItem(localizacaoItem)"></button>
-                </td>                
-            </tr>
-        </ng-template>
-    </p-table>
-
-</div>
+<ng-template #elseBlock>
+    <app-localizacao-lista
+    (isShowGridChange)='doChangeTela($event)'
+    (localizacaoEntityChange)='displayLocalizacao($event)'
+    ></app-localizacao-lista>
+</ng-template>

@@ -17,13 +17,15 @@ import { parceiroServico } from './parceiro.servico';
 export class ParceiroComponent implements OnInit {
 
   parceiroEntity = new ParceiroEntity();
-  lstParceiros = new Array<ParceiroEntity>();
+  cep:string="";
+  logradouro:string="";
+  localidade:string="";
+  bairro:string="";
+
   lstSexo = new Array<SexoEntity>();
 
-  isShowGrid: boolean = false;
   isShowForm: boolean = true;
-
-  strFilter:string='';
+  isShowGridCep:boolean=false;
 
   constructor(
     private _parceiroServico: parceiroServico, 
@@ -32,51 +34,32 @@ export class ParceiroComponent implements OnInit {
 
   ngOnInit(): void {
     this.parceiroEntity.id = 0;
-    this.doAtualizarPesquisa();
     this.doGetSexo();
   }
 
-  doAlternarTela(): void {
-    this.isShowGrid = (this.isShowGrid == true ? false : true);
-    this.isShowForm = (this.isShowForm == true ? false : true);
+  displayParceiro(_parceiroEntity:any) {
+    this.parceiroEntity = _parceiroEntity;
+    this.cep = _parceiroEntity.localizacao.cep;
+    this.logradouro = _parceiroEntity.localizacao.logradouro;
+    this.localidade = _parceiroEntity.localizacao.localidade;
+    this.bairro = _parceiroEntity.localizacao.bairro;
   }
 
-  doClear(table: Table) {
-    table.clear();
+  doChangeTela(showGrid:any) {
+    this.isShowForm = (showGrid == true ? false : true);
   }
 
-  applyFilterGlobal() : string{
-    return this.strFilter;
+  doChangeTelaLocalizacao() {
+    this.isShowGridCep = (this.isShowGridCep == true ? false : true);
+    this.doChangeTela(this.isShowForm);
+    console.log('passou na troca do cep');
   }
 
-  doPesquisar(): void {
-    this.doAlternarTela();
-  }
-
-  doSelecionarItem(ItemParceiroEntity: ParceiroEntity) {
-    this.parceiroEntity = ItemParceiroEntity;
-    this.doAlternarTela();
-  }  
 
   doGetSexo() {
     this._parceiroServico.doGetSexo()
       .subscribe((response) => {
         this.lstSexo = response.data;
-      },
-        (error) => {
-          //console.log(error);
-        },
-        () => {
-          //console.log('this complet');
-        }
-      );
-  }
-
-
-  doAtualizarPesquisa() {
-    this._parceiroServico.doGetParceiros()
-      .subscribe((response) => {
-        this.lstParceiros = response.data;
       },
         (error) => {
           //console.log(error);

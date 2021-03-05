@@ -1,5 +1,6 @@
 export class FinanceiroEntity{
     id: number=0;
+    nroDocumento:number=0;
     receita: boolean=true;
     parceiroId: number=0; 
     dtMovimento:string="";
