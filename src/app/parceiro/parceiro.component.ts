@@ -121,4 +121,9 @@ export class ParceiroComponent implements OnInit {
     this.doApagar();
   }
 
+  displayLocalizacao(_localizacaoEntity:any) {
+    console.log('passou no display da localização...');
+  }
+
+
 }

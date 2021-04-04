@@ -178,17 +178,20 @@
 </div>
 
 <ng-template  #elseBlock>
-    <div *ngIf="isShowGrid; else elseBlock">
+    <div *ngIf="isShowForm">
         <app-parceiro-lista 
         (isShowGridChange)='doChangeTela($event)'
         (parceiroEntityChange)='displayParceiro($event)'
         ></app-parceiro-lista>
     </div>
+    <!-- 
     <div *ngIf="isShowGridCep; else elseBlock">
         <app-localizacao-lista 
         (isShowGridChange)='doChangeTela($event)'
         (localizacaoEntityChange)='displayLocalizacao($event)'
         ></app-localizacao-lista>
 
-    </div>
+    </div> 
+    -->
 </ng-template>
+
