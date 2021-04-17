@@ -1,1 +1,51 @@
-<p>financeiro-lista works!</p>
+<div class="card">
+    <p-table #dt [value]="lstFinanceiros" [paginator]="true" [rows]="5" dataKey="id" styleClass="p-datatable-gridlines"
+        [showCurrentPageReport]="true" currentPageReportTemplate="De {first} a {last} de {totalRecords}"
+        [rowsPerPageOptions]="[5,10,15,20,50]"
+        [globalFilterFields]="['nomeParceiro','Historico','dtVencimento','dtMovimento']">
+
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" [(ngModel)]="strFilter"
+                        (input)="dt.filterGlobal(applyFilterGlobal(), 'contains')" placeholder="Filter" />
+                </span>
+                <p-button type="button" icon="pi pi-search-minus" styleClass="p-button-outlined" (click)="doClear(dt)">
+                </p-button>
+                <p-button type="button" icon="pi pi-chevron-left" styleClass="p-button-outlined"
+                    (click)="doShowGridChanged()">
+                </p-button>
+                <p-button type="button" icon="pi pi-refresh" styleClass="p-button-outlined"
+                    (click)="doAtualizarPesquisa()">
+                </p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Docto.</th>
+                <th>É Receita</th>
+                <th>Parceiro</th>
+                <th>Dt.Vencimento</th>
+                <th>Dt.Baixa</th>
+                <th>Vlr.Financeiro</th>
+                <th>Ação</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-financeiroItem>
+            <tr>
+                <td>{{financeiroItem.nroDocumento}}</td>
+                <td>{{financeiroItem.receita | simnaoPipe}}</td>
+                <td>{{financeiroItem.parceiro.nome}}</td>
+                <td>{{financeiroItem.dtVencimento | date: "dd/MM/yyyy" }}</td>
+                <td>{{financeiroItem.dtBaixa | date: "dd/MM/yyyy" }}</td>
+                <td>{{financeiroItem.vlrFinanceiro | currency:'BRL' }}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-check" Class="p-button-outlined"
+                        (click)="doSelecionarItem(financeiroItem)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

@@ -25,6 +25,7 @@ export class ParceiroComponent implements OnInit {
   lstSexo = new Array<SexoEntity>();
 
   isShowForm: boolean = true;
+  isShowGridParceiro:boolean=false;
   isShowGridCep:boolean=false;
 
   constructor(
@@ -47,6 +48,11 @@ export class ParceiroComponent implements OnInit {
 
   doChangeTela(showGrid:any) {
     this.isShowForm = (showGrid == true ? false : true);
+  }
+
+  doChangeTelaParceiro() {
+    this.isShowGridParceiro = (this.isShowGridParceiro == true ? false : true);
+    this.doChangeTela(this.isShowForm);
   }
 
   doChangeTelaLocalizacao() {
@@ -122,8 +128,10 @@ export class ParceiroComponent implements OnInit {
   }
 
   displayLocalizacao(_localizacaoEntity:any) {
-    console.log('passou no display da localização...');
+    this.parceiroEntity.localizacaoId = _localizacaoEntity.id;
+    this.cep = _localizacaoEntity.cep;
+    this.logradouro = _localizacaoEntity.logradouro;
+    this.localidade = _localizacaoEntity.localidade;
+    this.bairro = _localizacaoEntity.bairro;
   }
-
-
 }

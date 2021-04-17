@@ -1,4 +1,4 @@
-<div *ngIf="isShowForm">
+<div *ngIf="isShowForm; else elseBlock">
 
     <div class="p-grid">
         <div class="p-col-1">
@@ -12,7 +12,7 @@
             <span class="p-float-label">
                 <input id="float-nrodocumento" type="text" pInputText [(ngModel)]="financeiroEntity.nroDocumento" style="width:80%;" >
                 <label for="float-nrodocumento">Nro.Documento</label>
-                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaFinanceiro()"></button>
             </span>
 
         </div>
@@ -21,7 +21,7 @@
             <span class="p-float-label">
                 <input id="float-idparceiro" type="text" pInputText [(ngModel)]="financeiroEntity.parceiroId">
                 <label for="float-idparceiro">Id Parceiro</label>
-                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doPesquisar()"></button>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaParceiro()"></button>
                 <input id="float-parceiro" type="text" pInputText [(ngModel)]="nomeParceiro" style="width:75%;" disabled>
             </span>
 
@@ -84,54 +84,19 @@
         <button pButton icon="pi pi-trash" Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
     </div>
 </div>
-<div *ngIf="isShowGrid" class="card">
-    <p-table #dt [value]="lstFinanceiros" [paginator]="true" [rows]="5" dataKey="id" styleClass="p-datatable-gridlines"
-        [showCurrentPageReport]="true" currentPageReportTemplate="De {first} a {last} de {totalRecords}"
-        [rowsPerPageOptions]="[5,10,15,20,50]"
-        [globalFilterFields]="['nomeParceiro','Historico','dtVencimento','dtMovimento']">
+<ng-template  #elseBlock>
+    <div *ngIf="isShowGridFinanceiro">
+        <app-financeiro-lista 
+        (isShowGridChange)='doChangeTelaFinanceiro()'
+        (financeiroEntityChange)='displayFinanceiro($event)'
+        ></app-financeiro-lista>
+    </div>
 
-        <ng-template pTemplate="caption">
-            <div class="p-d-flex">
-                <span class="p-input-icon-left p-ml-auto">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" [(ngModel)]="strFilter"
-                        (input)="dt.filterGlobal(applyFilterGlobal(), 'contains')" placeholder="Filter" />
-                </span>
-                <p-button type="button" icon="pi pi-search-minus" styleClass="p-button-outlined" (click)="doClear(dt)">
-                </p-button>
-                <p-button type="button" icon="pi pi-chevron-left" styleClass="p-button-outlined"
-                    (click)="doAlternarTela()">
-                </p-button>
-                <p-button type="button" icon="pi pi-refresh" styleClass="p-button-outlined"
-                    (click)="doAtualizarPesquisa()">
-                </p-button>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th>É Receita</th>
-                <th>Parceiro</th>
-                <th>Dt.Vencimento</th>
-                <th>Dt.Baixa</th>
-                <th>Vlr.Financeiro</th>
-                <th>Ação</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-financeiroItem>
-            <tr>
-                <td>{{financeiroItem.receita | simnaoPipe}}</td>
-                <td>{{financeiroItem.parceiro.nome}}</td>
-                <td>{{financeiroItem.dtVencimento | date: "dd/MM/yyyy" }}</td>
-                <td>{{financeiroItem.dtBaixa | date: "dd/MM/yyyy" }}</td>
-                <td>{{financeiroItem.vlrFinanceiro | currency:'BRL' }}</td>
-                <td>
-                    <button pButton pRipple icon="pi pi-pencil" Class="p-button-outlined"
-                        (click)="doSelecionarItem(financeiroItem)"></button>
-                    <button pButton pRipple icon="pi pi-trash" Class="p-button-outlined"
-                        (click)="doApagarItem(financeiroItem)"></button>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+    <div *ngIf="isShowGridParceiro">
+        <app-parceiro-lista 
+        (isShowGridChange)='doChangeTelaParceiro()'
+        (parceiroEntityChange)='displayParceiro($event)'
+        ></app-parceiro-lista>
+    </div>
+</ng-template>
 
-</div>

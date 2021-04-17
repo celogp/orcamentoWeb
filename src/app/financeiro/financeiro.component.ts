@@ -13,60 +13,34 @@ import { FinanceiroLst } from '../entidades/FinanceiroLst';
 })
 export class FinanceiroComponent implements OnInit {
   financeiroEntity = new FinanceiroEntity();
-  lstFinanceiros = new Array<FinanceiroLst>();
 
-  isShowGrid: boolean = false;
   isShowForm: boolean = true;
+  isShowGridFinanceiro: boolean = false;
+  isShowGridParceiro: boolean = false;
   nomeParceiro : string=""
   strFilter:string='';
 
   constructor(private _utilService: utilService, 
     private _financeiroServico : financeiroServico) { 
-      
     }
 
   ngOnInit(): void {
     this.financeiroEntity.id = 0;
     this.financeiroEntity.pendente = true;
-    this.doAtualizarPesquisa();
   }
 
-  doAlternarTela(): void {
-    this.isShowGrid = (this.isShowGrid == true ? false : true);
-    this.isShowForm = (this.isShowForm == true ? false : true);
+  doChangeTela(showGrid:any) {
+    this.isShowForm = (showGrid == true ? false : true);
   }
 
-  doClear(table: Table) {
-    table.clear();
+  doChangeTelaFinanceiro() {
+    this.isShowGridFinanceiro = (this.isShowGridFinanceiro == true ? false : true);
+    this.doChangeTela(this.isShowForm);
   }
 
-  applyFilterGlobal() : string{
-    return this.strFilter;
-  }
-
-  doPesquisar(): void {
-    this.doAlternarTela();
-  }
-
-  doSelecionarItem(ItemFinanceiro: any) {
-    this.financeiroEntity = ItemFinanceiro;
-    this.nomeParceiro = ItemFinanceiro.parceiro.nome;
-    console.log(this.lstFinanceiros, ItemFinanceiro.parceiro.nome);
-    this.doAlternarTela();
-  }  
-
-  doAtualizarPesquisa() {
-    this._financeiroServico.doGetFinanceiros()
-      .subscribe((response) => {
-        this.lstFinanceiros = response.data;
-      },
-        (error) => {
-          //console.log(error);
-        },
-        () => {
-          //console.log('this complet');
-        }
-      );
+  doChangeTelaParceiro() {
+    this.isShowGridParceiro = (this.isShowGridParceiro == true ? false : true);
+    this.doChangeTela(this.isShowForm);
   }
 
   handleChange(e:any): void {
@@ -122,10 +96,14 @@ export class FinanceiroComponent implements OnInit {
       );
   }
 
-  doApagarItem(ItemFinanceiroEntity: FinanceiroEntity): void {
-    this.financeiroEntity = ItemFinanceiroEntity;
-    this.doApagar();
+  displayFinanceiro(_financeiroEntity:any) {
+    this.financeiroEntity = _financeiroEntity;
+    this.nomeParceiro = _financeiroEntity.parceiro.nome;
   }
 
+  displayParceiro(_parceiroEntity:any) {
+    this.financeiroEntity.parceiroId = _parceiroEntity.id;
+    this.nomeParceiro = _parceiroEntity.nome;
+  }
 
 }
