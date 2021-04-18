@@ -7,7 +7,7 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'my-orcamento';
+  titleForm = "Home";
   visibleSidebar: any;
 
   constructor(private primengConfig: PrimeNGConfig) {}

@@ -5,6 +5,7 @@ import { utilService } from '../utils/util.servico';
 import { financeiroServico } from './financeiro.servico';
 import { format } from 'date-fns';
 import { FinanceiroLst } from '../entidades/FinanceiroLst';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-financeiro',
@@ -21,10 +22,12 @@ export class FinanceiroComponent implements OnInit {
   strFilter:string='';
 
   constructor(private _utilService: utilService, 
-    private _financeiroServico : financeiroServico) { 
+    private _financeiroServico : financeiroServico, 
+    private _appComponent : AppComponent) { 
     }
 
   ngOnInit(): void {
+    this._appComponent.titleForm = "Financeiros"
     this.financeiroEntity.id = 0;
     this.financeiroEntity.pendente = true;
   }

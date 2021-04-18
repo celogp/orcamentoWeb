@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
+import { AppComponent } from '../app.component';
 import { LocalizacaoEntity } from '../entidades/LocalizacaoEntity';
 import { UfEntity } from '../entidades/UfsEntity';
 import { utilService } from '../utils/util.servico';
@@ -20,10 +21,12 @@ export class LocalizacaoComponent implements OnInit {
 
   constructor(
     private _utilService: utilService, 
-    private _localizacaoServico: localizacaoServico) {
+    private _localizacaoServico: localizacaoServico, 
+    private _appComponent : AppComponent) {
   }
 
   ngOnInit(): void {
+    this._appComponent.titleForm = "Localizações"
     this.localizacaoEntity.id = 0;
     this.doGetUfs();
   }

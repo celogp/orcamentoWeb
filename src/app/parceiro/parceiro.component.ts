@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
+import { AppComponent } from '../app.component';
 import { ParceiroEntity } from '../entidades/ParceiroEntity';
 import { SexoEntity } from '../entidades/SexoEntity';
 import { utilService } from '../utils/util.servico';
@@ -30,12 +31,16 @@ export class ParceiroComponent implements OnInit {
 
   constructor(
     private _parceiroServico: parceiroServico, 
-    private _utilService: utilService
-  ) { }
+    private _utilService: utilService, 
+    private _appComponent : AppComponent
+  ) { 
+  }
 
   ngOnInit(): void {
+    this._appComponent.titleForm = "Parceiros"
     this.parceiroEntity.id = 0;
     this.doGetSexo();
+
   }
 
   displayParceiro(_parceiroEntity:any) {
