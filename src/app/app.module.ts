@@ -34,6 +34,9 @@ import { ParceiroListaComponent } from './parceiro-lista/parceiro-lista.componen
 import { FinanceiroListaComponent } from './financeiro-lista/financeiro-lista.component';
 import { LocalizacaoListaComponent } from './localizacao-lista/localizacao-lista.component';
 
+import {  ChartModule } from 'primeng/chart';
+import {PickListModule} from 'primeng/picklist';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +68,9 @@ import { LocalizacaoListaComponent } from './localizacao-lista/localizacao-lista
     ToolbarModule, 
     DropdownModule, 
     TabViewModule,
-    InputNumberModule
+    InputNumberModule, 
+    ChartModule, 
+    PickListModule
   ],
   providers: [MessageService, utilService, localizacaoServico, parceiroServico, financeiroServico],
   bootstrap: [AppComponent]

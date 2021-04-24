@@ -26,6 +26,7 @@
                 <th>Docto.</th>
                 <th>É Receita</th>
                 <th>Parceiro</th>
+                <th>Dt.Movimento</th>
                 <th>Dt.Vencimento</th>
                 <th>Dt.Baixa</th>
                 <th>Vlr.Financeiro</th>
@@ -37,6 +38,7 @@
                 <td>{{financeiroItem.nroDocumento}}</td>
                 <td>{{financeiroItem.receita | simnaoPipe}}</td>
                 <td>{{financeiroItem.parceiro.nome}}</td>
+                <td>{{financeiroItem.dtMovimento | date: "dd/MM/yyyy" }}</td>
                 <td>{{financeiroItem.dtVencimento | date: "dd/MM/yyyy" }}</td>
                 <td>{{financeiroItem.dtBaixa | date: "dd/MM/yyyy" }}</td>
                 <td>{{financeiroItem.vlrFinanceiro | currency:'BRL' }}</td>

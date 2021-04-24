@@ -48,4 +48,11 @@ export class financeiroServico {
        return this.http.delete<ObjetoResposta>(this.FinanceiroUrl + 'doEstornarBaixa', this.httpOptions);
     }
 
+    public doGetFinanceirosMes(ano : number) {
+        let _params = new HttpParams();
+        _params=_params.append('ano', ano.toString());
+        this.httpOptions.params = _params;
+        return this.http.get<ObjetoResposta>(this.FinanceiroUrl + 'doObterFinanceirosMes', this.httpOptions);
+    }
+
 }

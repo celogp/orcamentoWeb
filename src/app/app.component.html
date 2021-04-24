@@ -308,12 +308,25 @@ svg#clouds {
 </div>
 
 <p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="100">
-  <h1 style="font-weight:normal">Opções</h1>
+
+  <div class="p-text-center">
+    <h1 style="font-weight:normal">Menu</h1>
+  </div>
+
   <div class="content" role="main">
-    <a routerLink="Home" (click)="visibleSidebar = false">Home</a>
-    <a routerLink="Localizacao" (click)="visibleSidebar = false">Localização</a>
-    <a routerLink="Parceiro" (click)="visibleSidebar = false">Parceiro</a>
-    <a routerLink="Financeiro" (click)="visibleSidebar = false">Financeiro</a>
+
+    <button pButton type="button" class="p-button-text" routerLink="Home" (click)="visibleSidebar = false" label="Home"></button>
+    <p-divider></p-divider>
+    
+    <button pButton type="button" class="p-button-text" routerLink="Localizacao" (click)="visibleSidebar = false" label="Localizacao"></button>
+    <p-divider></p-divider>
+
+    <button pButton type="button" class="p-button-text" routerLink="Parceiro" (click)="visibleSidebar = false" label="Parceiro"></button>
+    <p-divider></p-divider>
+
+    <button pButton type="button" class="p-button-text" routerLink="Financeiro" (click)="visibleSidebar = false" label="Financeiro"></button>
+    <p-divider></p-divider>
+
   </div>
 </p-sidebar>
 
