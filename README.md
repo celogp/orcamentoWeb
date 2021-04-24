@@ -26,6 +26,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Apresentação rápida.
+![](https://github.com/celogp/orcamentoWeb/blob/master/screens/MyOrcamento.GIF)
+
 ## Integração com API VIACEP para busca de Cep's.
 
 ## Telas básicas em desenvolvimento usando componentes do primafaces
