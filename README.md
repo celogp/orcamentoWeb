@@ -5,6 +5,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Interface of Components I using primeNG
 [PrimeNG](https://www.primefaces.org/primeng/showcase/#/setup)
 
+Integration external web for search zipcode
+[ViaCep](https://viacep.com.br/)
+
 ## Show demo.
 ![](https://github.com/celogp/orcamentoWeb/blob/d03e51cd7201cccfd82f5a243d7c0f1d1e0ef98b/screens/MyOrcamento.gif)
 
@@ -35,14 +38,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Integração com API VIACEP para busca de Cep's.
 
-## Telas básicas em desenvolvimento usando componentes do primafaces
-![](https://github.com/celogp/orcamentoWeb/blob/master/screens/MenuBasico.PNG)
-
-![](https://github.com/celogp/orcamentoWeb/blob/master/screens/CrudParceiros.PNG)
-
-![](https://github.com/celogp/orcamentoWeb/blob/master/screens/ConsultaParceiros.PNG)
-
-![](https://github.com/celogp/orcamentoWeb/blob/master/screens/CrudFinanceiroBasico.PNG)
 
 ## Componentes extras
 ## https://github.com/cesarrew/ng2-currency-mask
