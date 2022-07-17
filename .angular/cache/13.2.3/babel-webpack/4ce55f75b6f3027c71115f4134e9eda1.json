@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class FinanceiroBaixaEntity {\n  constructor(id, dtBaixa) {\n    this.id = 0;\n    this.id = id;\n    this.dtBaixa = dtBaixa;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

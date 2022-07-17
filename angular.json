@@ -132,5 +132,7 @@
       }
     }
   },
-  "defaultProject": "my-orcamento"
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class LocalizacaoEntity {\n  constructor() {\n    this.id = 0;\n    this.cep = \"\"; //maximo de 8\n\n    this.ufId = 0; //maximo de 2\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
