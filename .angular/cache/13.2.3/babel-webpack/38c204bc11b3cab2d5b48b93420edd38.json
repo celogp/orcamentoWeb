@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class ProdutoEntity {\n  constructor() {\n    this.id = 0;\n    this.nome = '';\n    this.volume = '';\n    this.ativo = true;\n    this.estoque = 0;\n    this.precoDaBase = false;\n    this.produtoTipoId = 0;\n    this.precoTabela = 0;\n    this.custoGerencial = 0;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

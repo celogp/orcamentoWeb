@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class ProdutoModeloEntity {\n  constructor() {\n    this.id = 0;\n    this.nome = '';\n    this.largura = 0;\n    this.comprimento = 0;\n    this.altura = 0;\n    this.espessura = 0;\n    this.linkImagem = '';\n    this.produtoAcabadoId = 0;\n    this.produtoBaseId = 0; //imagem? : File;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

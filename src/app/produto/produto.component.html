@@ -1,0 +1,79 @@
+<div *ngIf="isShowForm; else elseBlock">
+
+    <div class="p-grid">
+        <div class="p-col">
+            <h5>Nome</h5>
+            <span class="p-float-label">
+                <input id="float-nome" type="text" pInputText [(ngModel)]="produtoEntity.nome"
+                    style="width:94%;">
+                <label for="float-nome">Nome</label>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaProduto()"></button>
+            </span>
+        </div>
+        <div class="p-col-2">
+            <h5>Volume</h5>
+            <span class="p-float-label">
+                <input id="float-email" type="text" pInputText [(ngModel)]="produtoEntity.volume"
+                    style="width:100%;">
+                <label for="float-email">Volume</label>
+            </span>
+        </div>  
+        <div class="p-col-2">
+            <h5>Tipo</h5>
+            <p-dropdown [options]="lstProdutoTipo" [(ngModel)]="produtoEntity.produtoTipoId" placeholder="Select" optionLabel="nome" optionValue="id"></p-dropdown>
+        </div>           
+
+        <div class="p-col-1">
+            <h5>Ativo</h5>
+            <span class="p-float-label">
+                <p-inputSwitch [(ngModel)]="produtoEntity.ativo"></p-inputSwitch>
+            </span>
+        </div>                
+        <div class="p-col-1">
+            <h5>Preço Da Base</h5>
+            <span class="p-float-label">
+                <p-inputSwitch [(ngModel)]="produtoEntity.precoDaBase"></p-inputSwitch>
+            </span>
+        </div>             
+    </div>    
+    <div class="p-grid">
+        <div class="p-col-2">
+            <h5>Preço de Tabela</h5>
+            <span class="p-float-label">
+                <p-inputNumber [(ngModel)]="produtoEntity.precoTabela" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>                
+                <label for="float-valor">Preço de tabela</label>
+            </span>
+
+        </div>
+        <div class="p-col-2">
+            <h5>Custo Gerêncial</h5>
+            <span class="p-float-label">
+                <p-inputNumber [(ngModel)]="produtoEntity.custoGerencial" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
+                <label for="float-valor">Custo Gerencial</label>
+            </span>
+
+        </div>
+        <div class="p-col-2">
+            <h5>Estoque</h5>
+            <span class="p-float-label">
+                <p-inputNumber [(ngModel)]="produtoEntity.estoque" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>                
+                <label for="float-valor">Estoque</label>
+            </span>
+
+        </div>                
+    </div>
+
+    <p-divider></p-divider>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button pButton icon="pi pi-plus"   Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
+        <button pButton icon="pi pi-check"  Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
+        <button pButton icon="pi pi-trash"  Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <app-produto-lista
+    (isShowGridChange)='doChangeTela($event)'
+    (produtoEntityChange)='displayProduto($event)'
+    ></app-produto-lista>
+</ng-template>

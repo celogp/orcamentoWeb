@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { localizacaoServico } from './localizacao/localizacao.servico';
 import { LocalizacaoComponent } from './localizacao/localizacao.component';
-import {ToolbarModule} from 'primeng/toolbar';
+import { ToolbarModule } from 'primeng/toolbar';
 import { DropdownModule } from 'primeng/dropdown';
 import { CepPipe } from './pipes/ceppipe';
 import { ParceiroComponent } from './parceiro/parceiro.component';
@@ -34,8 +34,17 @@ import { ParceiroListaComponent } from './parceiro-lista/parceiro-lista.componen
 import { FinanceiroListaComponent } from './financeiro-lista/financeiro-lista.component';
 import { LocalizacaoListaComponent } from './localizacao-lista/localizacao-lista.component';
 
-import {  ChartModule } from 'primeng/chart';
-import {PickListModule} from 'primeng/picklist';
+import { ChartModule } from 'primeng/chart';
+import { PickListModule } from 'primeng/picklist';
+import { ProdutoComponent } from './produto/produto.component';
+import { ProdutoListaComponent } from './produto-lista/produto-lista.component';
+import { produtoServico } from './produto/produto.servico';
+import { ProdutoTipoPipe } from './pipes/produtotipopipe';
+import { ProdutoModeloComponent } from './produto-modelo/produto-modelo.component';
+import { ProdutoModeloListaComponent } from './produto-modelo-lista/produto-modelo-lista.component';
+import { produtoModeloServico } from './produto-modelo/produto-modelo.servico';
+
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -45,11 +54,16 @@ import {PickListModule} from 'primeng/picklist';
     CepPipe, 
     PhonePipe,
     SimNaoPipe,
+    ProdutoTipoPipe,
     ParceiroComponent,
     FinanceiroComponent,
     ParceiroListaComponent,
     FinanceiroListaComponent,
-    LocalizacaoListaComponent
+    LocalizacaoListaComponent,
+    ProdutoComponent,
+    ProdutoListaComponent,
+    ProdutoModeloComponent,
+    ProdutoModeloListaComponent
   ],
   imports: [
     BrowserModule,
@@ -70,9 +84,10 @@ import {PickListModule} from 'primeng/picklist';
     TabViewModule,
     InputNumberModule, 
     ChartModule, 
-    PickListModule
+    PickListModule, 
+    FileUploadModule
   ],
-  providers: [MessageService, utilService, localizacaoServico, parceiroServico, financeiroServico],
+  providers: [MessageService, utilService, localizacaoServico, parceiroServico, financeiroServico, produtoServico, produtoModeloServico],
   bootstrap: [AppComponent]
 })
 
