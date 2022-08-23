@@ -14,6 +14,7 @@ export const CFG_URLAPI = {
   FinanceiroUrl: CFG_API.Base + CFG_API.Servidor + CFG_API.Porta + '/financeiros/',
   ProdutoUrl: CFG_API.Base + CFG_API.Servidor + CFG_API.Porta + '/produtos/',
   ProdutoModeloUrl: CFG_API.Base + CFG_API.Servidor + CFG_API.Porta + '/produtosmodelos/',
+  ProdutoModeloImagemUrl: CFG_API.Base + CFG_API.Servidor + CFG_API.Porta + '/produtosmodelosimagem/',
   PesquisasUrl: CFG_API.Base + CFG_API.Servidor + CFG_API.Porta + '/pesquisas/',
   ViaCepUrl: 'https://viacep.com.br/ws/'
 }

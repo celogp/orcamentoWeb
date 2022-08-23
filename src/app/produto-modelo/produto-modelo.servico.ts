@@ -10,6 +10,7 @@ import { ObjetoResposta } from '../response/objectResponse';
 })
 export class produtoModeloServico {
   private ProdutoModeloUrl: string = CFG_URLAPI.ProdutoModeloUrl;
+  private ProdutoModeloImagemUrl : string = CFG_URLAPI.ProdutoModeloImagemUrl;
   private httpOptions = {
     headers:
       new HttpHeaders(
@@ -28,8 +29,22 @@ export class produtoModeloServico {
     return this.http.post<ObjetoResposta>(this.ProdutoModeloUrl + 'doAdicionar', _entity, this.httpOptions);
   }
 
-  public doAtualizar(_entity: ProdutoModeloEntity) {
-    return this.http.put<ObjetoResposta>(this.ProdutoModeloUrl + 'doAtualizar', _entity, this.httpOptions);
+  public doAtualizar(_entity: ProdutoModeloEntity, _file : File) {
+    
+     const _httpOptions = {
+      headers:
+        new HttpHeaders(
+          { 'Content-Type': 'multipart/form-data; charset=UTF-8', 'Access-Control-Allow-Origin': '*' }),
+      params: new HttpParams()
+    };
+     console.log('entidade => ', _entity); 
+    const formData = new FormData();
+    formData.append("produtoModeloReq", JSON.stringify(_entity));
+    formData.append("imagem", _file);
+    console.log('formData  => ', formData);
+
+
+    return this.http.put<ObjetoResposta>(this.ProdutoModeloUrl + 'doAtualizarImg',  formData , _httpOptions);
   }
 
   public doApagar(_entity: ProdutoModeloEntity) {
@@ -85,4 +100,18 @@ export class produtoModeloServico {
     }
   }
   
+  public doSalvarImagem(id:number, _file: File) {
+    
+    console.log('chamando backend com a imagem botão Save', id, _file);
+
+    const formData = new FormData();
+    formData.append("id", id.toString());
+    formData.append("conteudo", _file);
+
+    console.log('FormData =>', formData);
+
+    return this.http.post<ObjetoResposta>(this.ProdutoModeloImagemUrl + 'doSalvar',  formData);
+
+  }
+
 }

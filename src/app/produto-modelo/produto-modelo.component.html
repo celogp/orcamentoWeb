@@ -95,65 +95,28 @@
                     </span>
                 </div>
             </div>
-            <div class="p-grid">
-                <div class="p-col">
-                    <h5>
-                        <p-divider> Ou </p-divider>
-                    </h5>
-                </div>
-            </div>
-            <div class="p-grid">
-                <p-fileUpload name="myfile[]" 
-                accept="image/*" 
-                #fubauto mode="basic" 
-                [multiple]=true 
-                [showUploadButton]="false"
-                [showCancelButton]="false"
-                [previewWidth]="100"
-                ></p-fileUpload>
 
-                <div class="p-col">
-                    <label class="uploader" ondragover="return false;"
-                    [class.loaded]="loaded" 
-                    [style.outlineColor]="dragging ? activeColor : baseColor"
-                    (dragenter)="handleDragEnter()"
-                    (dragleave)="handleDragLeave()"
-                    (drop)="handleDrop($event)">
-                    
-                        <i class="icon icon-upload" 
-                            [style.color]="dragging 
-                                ? ((imageSrc.length > 0) ? overlayColor : activeColor)
-                                : ((imageSrc.length > 0) ? overlayColor : baseColor)">
-                        </i>
-                    
-                        <img 
-                            [src]="imageSrc" 
-                            (load)="handleImageLoad()" 
-                            [class.loaded]="imageLoaded"/>
-
-                    </label>
-                </div>
-            </div>
+            <p-divider></p-divider>
 
             <div class="p-grid">
-                <input class="input-file" type="file" name="file" accept="image/*"
-                (change)="handleInputChange($event)">
+                <span style="color:red;" *ngIf="message">{{message}}</span>
+                <label for='selecao-arquivo'
+                pButton Class="p-button-outlined">Image Preview</label>
+                <input 
+                #file type="file" accept='image/*' (change)="preview(file.files)" 
+                style="display:none;"
+                id='selecao-arquivo'/>
             </div>
+
+            <p-divider></p-divider>
 
             <div class="p-grid">
-                <div class="p-col">
-                    <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                        <button pButton Class="p-button-outlined" 
-                        (click)="cancel()">Apagar
-                    </button>
-                </div>
-                <div class="p-col">
-                    <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*" [maxFileSize]="1000000" 
-                    [auto]="true" chooseLabel="Adicionar"></p-fileUpload>
-
-                    </div>
-                </div>
+                <img [src]="imageSrc" width="200" style="vertical-align: middle" *ngIf="imageSrc">
             </div>
+
+            <p-divider></p-divider>
+            <button pButton icon="pi pi-plus"   Class="p-button-outlined" (click)="doSalvarImagem()" label="Salvar"></button>
+
         </div>
     
     </div>

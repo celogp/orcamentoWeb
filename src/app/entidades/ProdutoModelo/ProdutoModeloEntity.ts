@@ -9,5 +9,6 @@ export class ProdutoModeloEntity{
     linkImagem : string = '';
     produtoAcabadoId : number = 0;
     produtoBaseId : number = 0;
-    imagemsrc : string = '';
+    imagemsrc : string = '' ;
+    //imagem ?: File ;
 }

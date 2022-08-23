@@ -49,6 +49,7 @@ export class ProdutoModeloListaComponent implements OnInit {
     this._produtoModeloServico.doGetProdutosModelo()
       .subscribe((response) => {
         this.lstProdutoModelo = response.data;
+        console.log('produtomodelo', this.lstProdutoModelo);
       },
         (error) => {
           //console.log(error);
