@@ -1,0 +1,136 @@
+<div *ngIf="isShowForm; else elseBlock">
+    <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-d-flex p-flex-column p-flex-md-row">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Bloqueado</h5>
+                    <span class="p-float-label">
+                        <p-inputSwitch [(ngModel)]="orcamentoEntity.bloqueado"></p-inputSwitch>
+                    </span>
+
+                </div>
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Nro.Documento</h5>
+                    <span class="p-float-label">
+                        <input id="float-nrodocumento" type="text" pInputText [(ngModel)]="orcamentoEntity.numero">
+                        <label for="float-nrodocumento">Nro.Documento</label>
+                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaOrcamento()"></button>
+                    </span>
+
+                </div>
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Nome</h5>
+                    <span class="p-float-label">
+                        <input id="float-nome" type="text" pInputText [(ngModel)]="nomeParceiro" disabled>
+                        <label for="float-nome">Nome</label>
+                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaParceiro()"></button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-d-flex p-flex-column p-flex-md-row">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Dt.Movimento</h5>
+                    <span class="p-float-label">
+                        <input id="float-movimento" type="date" pInputText [(ngModel)]="orcamentoEntity.dtMovimento">
+                    </span>
+                </div>
+
+
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Dt.Entrega</h5>
+                    <span class="p-float-label">
+                        <input id="float-vencimento" type="date" pInputText [(ngModel)]="orcamentoEntity.dtEntrega">
+                    </span>
+                </div>
+
+
+            </div>
+            <div class="p-d-flex p-flex-column p-flex-md-row">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Descrição</h5>
+                    <span class="p-float-label">
+                        <input id="float-historico" type="text" pInputText [(ngModel)]="orcamentoEntity.descricao"
+                            style="width:100%;">
+                        <label for="float-historico">Descrição</label>
+                    </span>
+                </div>    
+            </div>
+            <div class="p-d-flex p-flex-column p-flex-md-row">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Vlr.Itens</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoEntity.vlrTotalItens" inputId="locale-user" 
+                        [minFractionDigits]="2"
+                        [disabled]="true"></p-inputNumber>
+                        <label for="float-valor">Vlr.itens</label>
+                    </span>
+        
+                </div>
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Vlr.Desconto</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoEntity.vlrDesconto" inputId="locale-user" 
+                        [maxFractionDigits]="2" 
+                        (ngModelChange)="doCalculaPercDesconto()" ></p-inputNumber>
+                        <label for="float-valor">Vlr.Desconto</label>
+                    </span>
+                </div>
+                <div class="p-mb-2 p-mr-2">
+                    <h5>% desconto</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoEntity.percDesconto" inputId="locale-user" [maxFractionDigits]="2" (ngModelChange)="doCalculaVlrDesconto()" ></p-inputNumber>
+                        <label for="float-valor">% desconto</label>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="p-d-flex p-flex-column p-flex-md-row">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Total</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoEntity.vlrTotal" inputId="locale-user" 
+                        [maxFractionDigits]="2"
+                        [disabled]="true"></p-inputNumber>
+                        <label for="float-valor">Vlr.Total</label>
+                    </span>
+                </div>
+            </div>
+        </div>    
+    
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-mb-2 p-mr-2">
+                <div class="p-d-flex p-flex-column p-flex-md-row">
+                    <app-orcamento-item-lista orcamentoId={{orcamentoEntity.id}}></app-orcamento-item-lista>
+                </div>                
+
+            </div>   
+        </div>    
+
+    </div>
+
+
+    <p-divider></p-divider>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button pButton icon="pi pi-plus" Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
+        <button pButton icon="pi pi-check" Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
+        <button pButton icon="pi pi-trash" Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <div *ngIf="isShowGridOrcamento">
+        <app-orcamento-lista 
+        (isShowGridChange)='doChangeTelaOrcamento()'
+        (orcamentoEntityChange)='displayOrcamento($event)'
+        ></app-orcamento-lista>
+    </div>
+
+    <div *ngIf="isShowGridParceiro">
+        <app-parceiro-lista 
+        (isShowGridChange)='doChangeTelaParceiro()'
+        (parceiroEntityChange)='displayParceiro($event)'
+        ></app-parceiro-lista>
+    </div>
+</ng-template>

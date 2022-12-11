@@ -45,6 +45,19 @@ import { ProdutoModeloListaComponent } from './produto-modelo-lista/produto-mode
 import { produtoModeloServico } from './produto-modelo/produto-modelo.servico';
 
 import {FileUploadModule} from 'primeng/fileupload';
+import {ImageModule} from 'primeng/image';
+import {CardModule} from 'primeng/card';
+import { ProdutoModeloComponListaComponent } from './produto-modelo-compon-lista/produto-modelo-compon-lista.component';
+import { ProdutoModeloComponComponent } from './produto-modelo-compon/produto-modelo-compon.component';
+import { produtoModeloComponService } from './produto-modelo-compon/produto-modelo-compon.service';
+import { OrcamentoComponent } from './orcamento/orcamento.component';
+import { OrcamentoListaComponent } from './orcamento-lista/orcamento-lista.component';
+import { OrcamentoComponenteComponent } from './orcamento-componente/orcamento-componente.component';
+import { orcamentoService } from './orcamento/orcamento.service';
+import { OrcamentoItemComponent } from './orcamento-item/orcamento-item.component';
+import { OrcamentoItemListaComponent } from './orcamento-item-lista/orcamento-item-lista.component';
+import { OrcamentoComponenteListaComponent } from './orcamento-componente-lista/orcamento-componente-lista.component';
+import { orcamentoComponenteService } from './orcamento-componente/orcamento-componente.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +76,15 @@ import {FileUploadModule} from 'primeng/fileupload';
     ProdutoComponent,
     ProdutoListaComponent,
     ProdutoModeloComponent,
-    ProdutoModeloListaComponent
+    ProdutoModeloListaComponent,
+    ProdutoModeloComponListaComponent,
+    ProdutoModeloComponComponent,
+    OrcamentoComponent,
+    OrcamentoListaComponent,
+    OrcamentoComponenteComponent,
+    OrcamentoItemComponent,
+    OrcamentoItemListaComponent,
+    OrcamentoComponenteListaComponent
   ],
   imports: [
     BrowserModule,
@@ -85,9 +106,13 @@ import {FileUploadModule} from 'primeng/fileupload';
     InputNumberModule, 
     ChartModule, 
     PickListModule, 
-    FileUploadModule
+    FileUploadModule, 
+    ImageModule,
+    CardModule
   ],
-  providers: [MessageService, utilService, localizacaoServico, parceiroServico, financeiroServico, produtoServico, produtoModeloServico],
+  providers: [MessageService, utilService, localizacaoServico, parceiroServico, financeiroServico, produtoServico, produtoModeloServico, orcamentoService
+    , produtoModeloComponService
+    , orcamentoComponenteService],
   bootstrap: [AppComponent]
 })
 

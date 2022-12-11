@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Table } from 'primeng/table';
+import { IMAGEM_VAZIA } from '../app.config';
 import { ProdutoModeloEntity } from '../entidades/ProdutoModelo/ProdutoModeloEntity';
 import { ProdutoModeloLst } from '../entidades/ProdutoModelo/ProdutoModeloLst';
 import { produtoModeloServico } from '../produto-modelo/produto-modelo.servico';
@@ -13,6 +14,9 @@ export class ProdutoModeloListaComponent implements OnInit {
   lstProdutoModelo = new Array<ProdutoModeloLst>();
   isShowGrid: boolean = false;
   strFilter:string='';
+  strInicialImagem = 'data:image/png;base64,';
+  imageVazia: any = IMAGEM_VAZIA.Image;
+
 
   @Output()
   produtoModeloEntityChange = new EventEmitter<ProdutoModeloEntity>();
@@ -33,6 +37,7 @@ export class ProdutoModeloListaComponent implements OnInit {
   }  
 
   doClear(table: Table) {
+    this.strFilter = '';
     table.clear();
   }
 
@@ -49,7 +54,6 @@ export class ProdutoModeloListaComponent implements OnInit {
     this._produtoModeloServico.doGetProdutosModelo()
       .subscribe((response) => {
         this.lstProdutoModelo = response.data;
-        console.log('produtomodelo', this.lstProdutoModelo);
       },
         (error) => {
           //console.log(error);

@@ -1,0 +1,46 @@
+<div *ngIf="isShowForm; else elseBlock">
+    <div class="p-text-right">
+        <p-button icon="pi pi-arrow-left" Class="p-button-outlined" (click)="doChangeTelaProdutoModeloCompon()" label="Voltar"></p-button>
+    </div>
+    <div class="p-grid p-fluid">
+        <div class="p-col-10">
+            <h5>Nome</h5>
+            <span class="p-float-label">
+                <input id="float-produtoComponente" type="text" pInputText [(ngModel)]="nomeProdutoComponente" style="width:80%;" disabled>
+                <label for="float-idproduto">Nome</label>
+                <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaProdutoCompon()"></button>
+            </span>
+        </div>
+
+        <div class="p-col-2">
+            <h5>Quantidade</h5>
+            <span class="p-float-label">
+                <p-inputNumber [(ngModel)]="produtoModeloComponEntity.quantidade" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
+                <label for="float-nome">Quantidade</label>
+            </span>
+        </div>
+    </div>
+    <p-divider></p-divider>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button pButton icon="pi pi-plus"    Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
+        <button pButton icon="pi pi-check"   Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
+        <button pButton icon="pi pi-trash"   Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
+    </div>    
+</div>
+
+<ng-template #elseBlock>
+    <div *ngIf="isShowGridProdutoModeloCompon">
+        <app-produto-modelo-compon-lista produtoModeloId={{produtoModeloId}}
+        (isShowGridChange)='doChangeTelaProdutoModeloCompon()'
+        (produtoModeloComponEntityChange)='displayProdutoModeloCompon($event)'>
+        </app-produto-modelo-compon-lista>
+    </div>
+    <div *ngIf="isShowGridProdutoCompon">
+        <app-produto-lista
+        (isShowGridChange)='doChangeTelaProdutoCompon()'
+        (produtoEntityChange)='displayProdutoCompon($event)'
+        ></app-produto-lista>
+    </div>    
+</ng-template>
+
+

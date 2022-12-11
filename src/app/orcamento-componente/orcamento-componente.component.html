@@ -1,0 +1,147 @@
+
+<div *ngIf="isShowForm; else elseBlock">
+    <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="p-d-flex p-flex-column p-flex-md-row">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Produto</h5>
+                    <span class="p-float-label">
+                        <input id="float-produto" type="text" pInputText [(ngModel)]="nomeProduto" disabled>
+                        <label for="float-produto">Produto</label>
+                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaProduto()"></button>
+                    </span>
+                </div>
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Volume</h5>
+                    <span class="p-float-label">
+                        <input id="float-volume" type="text" pInputText [(ngModel)]="orcamentoItemComponenteEntity.volume" disabled>
+                        <label for="float-volume">Volume</label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-d-flex p-flex-column p-flex-md-row">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Largura</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.largura" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            (ngModelChange)="doCalculaArea()"></p-inputNumber>
+                        <label for="float-nome">Largura</label>
+                    </span>
+                </div>
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Comprimento</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.comprimento" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            (ngModelChange)="doCalculaArea()"></p-inputNumber>
+                        <label for="float-nome">Comprimento</label>
+                    </span>
+                </div>
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Area</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.area" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            [disabled]="true"></p-inputNumber>
+                        <label for="float-nome">Area</label>
+                    </span>
+                </div>
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Espessura</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.espessura" inputId="locale-user"
+                            [minFractionDigits]="2"></p-inputNumber>
+                        <label for="float-nome">Espessura</label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-d-flex p-flex-column p-flex-md-row">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Quantidade</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.quantidade" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            (ngModelChange)="doCalculaVlrBruto()"></p-inputNumber>
+                        <label for="float-nome">Quantidade</label>
+                    </span>
+                </div>
+                <div class="p-mb-2 p-mr-2"  *ngIf="this.isEdit">
+                    <h5>Vlr.unitário</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.vlrUnitario" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            [disabled]="true"></p-inputNumber>
+                        <label for="float-nome">Vlr.Unitário</label>
+                    </span>                    
+                </div>
+                <div class="p-mb-2 p-mr-2" *ngIf="this.isEdit">
+                    <h5>Vlr.Bruto</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.vlrBruto" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            [disabled]="true"></p-inputNumber>
+                        <label for="float-nome">Vlr.Bruto</label>
+                    </span>                    
+                </div>
+
+            </div>
+
+            <div class="p-d-flex p-flex-column p-flex-md-row" *ngIf="this.isEdit">
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Vlr.Desconto</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.vlrDesconto" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            (ngModelChange)="doCalculaPercDesconto()"></p-inputNumber>
+                        <label for="float-nome">Vlr.Desconto</label>
+                    </span>                    
+                </div>
+
+                <div class="p-mb-2 p-mr-2">
+                    <h5>%.Desconto</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.percDesconto" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            (ngModelChange)="doCalculaVlrDesconto()"></p-inputNumber>
+                        <label for="float-nome">%.Desconto</label>
+                    </span>                    
+                </div>
+
+                <div class="p-mb-2 p-mr-2">
+                    <h5>Vlr.Líquido</h5>
+                    <span class="p-float-label">
+                        <p-inputNumber [(ngModel)]="orcamentoItemComponenteEntity.vlrLiquido" inputId="locale-user"
+                            [minFractionDigits]="2"
+                            [disabled]="true"></p-inputNumber>
+                        <label for="float-nome">Vlr.Líquido</label>
+                    </span>                    
+                </div>
+
+            </div>  
+            
+        </div>    
+    </div>
+
+
+    <p-divider></p-divider>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button pButton icon="pi pi-chevron-left" Class="p-button-outlined" (click)="doListaComponente()" label="Voltar"></button>
+        <button pButton icon="pi pi-plus"  Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
+        <button pButton icon="pi pi-check" Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
+        <button pButton icon="pi pi-trash" Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <div *ngIf="isShowGridProduto">
+        <app-produto-lista 
+        (isShowGridChange)='doChangeTelaProduto()'
+        (produtoEntityChange)='displayProduto($event)'
+        ></app-produto-lista>
+    </div>
+</ng-template>
+
+

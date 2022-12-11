@@ -6,10 +6,6 @@ import { SexoEntity } from '../entidades/SexoEntity';
 import { utilService } from '../utils/util.servico';
 import { parceiroServico } from './parceiro.servico';
 
-/*
-  Falta fazer a pesquisa do endereço.
-*/
-
 @Component({
   selector: 'app-parceiro',
   templateUrl: './parceiro.component.html',
@@ -63,9 +59,7 @@ export class ParceiroComponent implements OnInit {
   doChangeTelaLocalizacao() {
     this.isShowGridCep = (this.isShowGridCep == true ? false : true);
     this.doChangeTela(this.isShowForm);
-    console.log('passou na troca do cep');
   }
-
 
   doGetSexo() {
     this._parceiroServico.doGetSexo()
@@ -90,7 +84,6 @@ export class ParceiroComponent implements OnInit {
           this._utilService.doApresentaMensagens('Adicionou o registro', 'success');
         },
         (errorResponse) => {
-          //console.info('this is complet', error.id);
           this._utilService.doApresentaMensagens(errorResponse.error.mensagens, 'error');
         },
         () => {

@@ -24,10 +24,12 @@
         <ng-template pTemplate="header">
             <tr>
                 <th>Nome</th>
-                <th>Largura</th>
-                <th>Comprimento</th>
+                <th>Prod.Acabado</th>
+                <th>Volume</th>
+                <th>Prod.Base</th>
+                <th>Volume</th>
+                <th>Medidas</th>
                 <th>Espessura</th>
-                <th>Altura</th>
                 <th>Imagem</th>
                 <th>Ação</th>
             </tr>
@@ -35,14 +37,20 @@
         <ng-template pTemplate="body" let-produtoModeloItem>
             <tr>
                 <td>{{produtoModeloItem.nome}}</td>
-                <td>{{produtoModeloItem.largura | number }}</td>
-                <td>{{produtoModeloItem.comprimento | number }}</td>
+                <td>{{produtoModeloItem.produtoAcabado.nome}}</td>
+                <td>{{produtoModeloItem.produtoAcabado.volume}}</td>
+                <td>{{produtoModeloItem.produtoBase.nome}}</td>
+                <td>{{produtoModeloItem.produtoBase.volume}}</td>
+                <td>{{produtoModeloItem.largura | number }} x {{produtoModeloItem.comprimento | number }}</td>
                 <td>{{produtoModeloItem.espessura | number }}</td>
-                <td>{{produtoModeloItem.altura | number }}</td>
                 <td>
-                    <img src={{produtoModeloItem.imagemsrc}} width="50" style="vertical-align: middle">
+                    <div *ngIf="produtoModeloItem.produtoModeloImagem as value; else elseBlock">
+                        <p-image src={{strInicialImagem}}{{produtoModeloItem.produtoModeloImagem.conteudo}} alt="Image" width="50" [preview]="true" ></p-image>
+                    </div>
+                    <ng-template #elseBlock>
+                        <p-image src={{imageVazia}} alt="Image" width="50" [preview]="true" ></p-image>
+                    </ng-template>
                 </td>
-                
                 <td>
                     <button pButton pRipple icon="pi pi-check" Class="p-button-outlined" (click)="doSelecionarItem(produtoModeloItem)"></button>
                 </td>                

@@ -1,6 +1,6 @@
 <div *ngIf="isShowForm; else elseBlock">
     <div class="p-grid">
-        <div class="p-col-6">
+        <div class="p-col-12 p-md-6 p-lg-6">
             <div class="p-grid">
                 <div class="p-col">
                     <h5>Nome</h5>
@@ -8,148 +8,123 @@
                         <input id="float-nome" type="text" pInputText [(ngModel)]="produtoModeloEntity.nome"
                             style="width:94%;">
                         <label for="float-nome">Nome</label>
-                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaProdutoModelo()"></button>
+                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined"
+                            (click)="doChangeTelaProdutoModelo()"></button>
                     </span>
                 </div>
             </div>
             <div class="p-grid">
-                <div class="p-col-3">
-                    <h5>Id Produto Acabado</h5>
+                <div class="p-col">
+                    <h5>Produto acabado</h5>
                     <span class="p-float-label">
-                        <input id="float-idprodutoAcabado" type="text" pInputText [(ngModel)]="produtoModeloEntity.produtoAcabadoId" style="width:60%;">
-                        <label for="float-idprodutoAcabado">Id Produto Acabado</label>
-                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaProdutoAcabado()"></button>
-                    </span>
-                </div>
-                <div class="p-col-9">
-                    <h5>Nome</h5>
-                    <span class="p-float-label">
-                        <input id="float-produtoAcabado" type="text" pInputText [(ngModel)]="nomeProdutoAcabado" style="width:100%;" disabled>
-                        <label for="float-idprodutoAcabado">Nome</label>
-                    </span>
-
-                </div>
-            </div>
-
-            <div class="p-grid">
-                <div class="p-col-3">
-                    <h5>Id Produto Base</h5>
-                    <span class="p-float-label">
-                        <input id="float-idprodutoBase" type="text" pInputText [(ngModel)]="produtoModeloEntity.produtoBaseId" style="width:60%;">
-                        <label for="float-idprodutoBase">Id Produto Base</label>
-                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doChangeTelaProdutoBase()"></button>
-                    </span>
-                </div>
-                <div class="p-col-9">
-                    <h5>Nome</h5>
-                    <span class="p-float-label">
-                        <input id="float-produtoBase" type="text" pInputText [(ngModel)]="nomeProdutoBase" style="width:100%;" disabled>
-                        <label for="float-idprodutoBase">Nome</label>
+                        <input id="float-produtoAcabado" type="text" pInputText [(ngModel)]="nomeProdutoAcabado"
+                            style="width:94%;" disabled>
+                        <label for="float-idprodutoAcabado">Produto acabado</label>
+                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined"
+                            (click)="doChangeTelaProdutoAcabado()"></button>
                     </span>
                 </div>
             </div>
 
             <div class="p-grid">
-                <div class="p-col-6">
+                <div class="p-col">
+                    <h5>Produto Base</h5>
+                    <span class="p-float-label">
+                        <input id="float-produtoBase" type="text" pInputText [(ngModel)]="nomeProdutoBase"
+                            style="width:94%;" disabled>
+                        <label for="float-idprodutoBase">Produto base</label>
+                        <button pButton pRipple icon="pi pi-search" Class="p-button-outlined"
+                            (click)="doChangeTelaProdutoBase()"></button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-grid">
+                <div class="p-col-4">
                     <h5>Largura</h5>
                     <span class="p-float-label">
-                        <p-inputNumber [(ngModel)]="produtoModeloEntity.largura" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
+                        <p-inputNumber [(ngModel)]="produtoModeloEntity.largura" inputId="locale-user"
+                            [minFractionDigits]="2"></p-inputNumber>
                         <label for="float-nome">Largura</label>
                     </span>
                 </div>
-                <div class="p-col-6">
+                <div class="p-col-4">
                     <h5>Comprimento</h5>
                     <span class="p-float-label">
-                        <p-inputNumber [(ngModel)]="produtoModeloEntity.comprimento" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
+                        <p-inputNumber [(ngModel)]="produtoModeloEntity.comprimento" inputId="locale-user"
+                            [minFractionDigits]="2"></p-inputNumber>
                         <label for="float-nome">Comprimento</label>
                     </span>
                 </div>
-        
-            </div>
-            <div class="p-grid">
-                <div class="p-col-6">
+
+                <div class="p-col-4">
                     <h5>Espessura</h5>
                     <span class="p-float-label">
-                        <p-inputNumber [(ngModel)]="produtoModeloEntity.espessura" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
+                        <p-inputNumber [(ngModel)]="produtoModeloEntity.espessura" inputId="locale-user"
+                            [minFractionDigits]="2"></p-inputNumber>
                         <label for="float-nome">Espessura</label>
                     </span>
                 </div>
-                <div class="p-col-6">
-                    <h5>Altura</h5>
-                    <span class="p-float-label">
-                        <p-inputNumber [(ngModel)]="produtoModeloEntity.altura" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
-                        <label for="float-nome">Altura</label>
-                    </span>
-                </div>        
-            </div>
 
+            </div>
         </div>
-        <div class="p-col-6">
+
+        <div class="p-col-12 p-md-6 p-lg-6">
             <div class="p-grid">
-                <div class="p-col">
-                    <h5>Link da imagem</h5>
-                    <span class="p-float-label">
-                        <input id="float-nome" type="text" pInputText [(ngModel)]="produtoModeloEntity.linkImagem"
-                            style="width:94%;">
-                        <label for="float-nome">Link da Imagem</label>
-                    </span>
-                </div>
-            </div>
-
-            <p-divider></p-divider>
-
-            <div class="p-grid">
-                <span style="color:red;" *ngIf="message">{{message}}</span>
-                <label for='selecao-arquivo'
-                pButton Class="p-button-outlined">Image Preview</label>
-                <input 
-                #file type="file" accept='image/*' (change)="preview(file.files)" 
-                style="display:none;"
-                id='selecao-arquivo'/>
-            </div>
-
-            <p-divider></p-divider>
-
-            <div class="p-grid">
-                <img [src]="imageSrc" width="200" style="vertical-align: middle" *ngIf="imageSrc">
-            </div>
-
-            <p-divider></p-divider>
-            <button pButton icon="pi pi-plus"   Class="p-button-outlined" (click)="doSalvarImagem()" label="Salvar"></button>
-
-        </div>
+                <p-tabView>
+                    <p-tabPanel header="Imagem" [selected]="true">
+                        <div class="p-grid">
+                            <p-image [src]="imageSrc" alt="Image" width="250" [preview]="true" *ngIf="imageSrc"></p-image>
+                        </div>
+                        <p-divider></p-divider>
     
+                        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+    
+                            <span style="color:red;" *ngIf="messageImagem">{{messageImagem}}</span>
+                            <label for='selecao-arquivo' pButton Class="p-button-outlined">Selectionar</label>
+                            <input #file type="file" accept='image/*' (change)="preview(file.files)" style="display:none;"
+                                id='selecao-arquivo' />
+    
+                            <button pButton icon="pi pi-trash" Class="p-button-outlined" (click)="doApagarImagem()"
+                                label="Apagar"></button>
+                        </div>
+    
+                    </p-tabPanel>
+    
+                    <p-tabPanel header="Componentes">
+                        <app-produto-modelo-compon produtoModeloId={{produtoModeloEntity.id}}>
+                        </app-produto-modelo-compon>
+                    </p-tabPanel>
+                </p-tabView>
+    
+            </div>
+
+        </div>
+
     </div>
 
     <p-divider></p-divider>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button pButton icon="pi pi-plus"   Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
-        <button pButton icon="pi pi-check"  Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
-        <button pButton icon="pi pi-trash"  Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
+        <button pButton icon="pi pi-plus" Class="p-button-outlined" (click)="doAdicionar()" label="Adicionar"></button>
+        <button pButton icon="pi pi-check" Class="p-button-outlined" (click)="doAtualizar()" label="Atualizar"></button>
+        <button pButton icon="pi pi-trash" Class="p-button-outlined" (click)="doApagar()" label="Apagar"></button>
     </div>
 </div>
 
 <ng-template #elseBlock>
     <div *ngIf="isShowGridProdutoModelo">
-        <app-produto-modelo-lista
-        (isShowGridChange)='doChangeTelaProdutoModelo()'
-        (produtoModeloEntityChange)='displayProdutoModelo($event)'
-        ></app-produto-modelo-lista>
+        <app-produto-modelo-lista (isShowGridChange)='doChangeTelaProdutoModelo()'
+            (produtoModeloEntityChange)='displayProdutoModelo($event)'></app-produto-modelo-lista>
     </div>
 
     <div *ngIf="isShowGridProdutoAcabado">
-        <app-produto-lista
-        (isShowGridChange)='doChangeTelaProdutoAcabado()'
-        (produtoEntityChange)='displayProdutoAcabado($event)'
-        ></app-produto-lista>
+        <app-produto-lista (isShowGridChange)='doChangeTelaProdutoAcabado()'
+            (produtoEntityChange)='displayProdutoAcabado($event)'></app-produto-lista>
     </div>
 
     <div *ngIf="isShowGridProdutoBase">
-        <app-produto-lista
-        (isShowGridChange)='doChangeTelaProdutoBase()'
-        (produtoEntityChange)='displayProdutoBase($event)'
-        ></app-produto-lista>
+        <app-produto-lista (isShowGridChange)='doChangeTelaProdutoBase()'
+            (produtoEntityChange)='displayProdutoBase($event)'></app-produto-lista>
     </div>
 
 </ng-template>
-

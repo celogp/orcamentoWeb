@@ -4,7 +4,6 @@ import { FinanceiroEntity } from '../entidades/FinanceiroEntity';
 import { utilService } from '../utils/util.servico';
 import { financeiroServico } from './financeiro.servico';
 import { format } from 'date-fns';
-import { FinanceiroLst } from '../entidades/FinanceiroLst';
 import { AppComponent } from '../app.component';
 
 @Component({

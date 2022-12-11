@@ -1,0 +1,67 @@
+
+<div class="card">
+
+    <p-table #dt [value]="lstOrcamentoItens" [paginator]="true" [rows]="5" dataKey="id"
+        styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped"
+        [showCurrentPageReport]="true" 
+        currentPageReportTemplate="De {first} a {last} de {totalRecords}"
+        [rowsPerPageOptions]="[5,10,15,20,50]"
+        [globalFilterFields]="['nomeProduto']">
+
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" [(ngModel)]="strFilter" (input)="dt.filterGlobal(applyFilterGlobal(), 'contains')" placeholder="Filter" />
+                </span>
+                <p-button type="button" icon="pi pi-search-minus" styleClass="p-button-outlined" (click)="doClear(dt)">
+                </p-button>                   
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-outlined" (click)="doTelaOrcamentoItemAdd()">
+                </p-button>
+                <p-button type="button" icon="pi pi-refresh" styleClass="p-button-outlined" (click)="doAtualizarPesquisa()">
+                </p-button>                   
+            </div>
+        </ng-template>        
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Produto</th>
+                <th>Volume</th>
+                <th>quantidade</th>
+                <th>Vlr.unitário</th>
+                <th>Vlr.Bruto</th>
+                <th>Vlr.Desconto</th>
+                <th>Perc.Desconto</th>
+                <th>Vlr.Líquido</th>
+                <th>Medidas (L-C-A)</th>
+                <th>Espessura</th>
+                <th>Ação</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-orcamentoItem>
+            <tr>
+                <td>{{orcamentoItem.produto.nome }}</td>
+                <td>{{orcamentoItem.volume}}</td>
+                <td>{{orcamentoItem.quantidade | number : '1.2-2'  }}</td>
+                <td>{{orcamentoItem.vlrUnitario |  currency :'R$':'symbol':'1.2-2' }}</td>
+                <td>{{orcamentoItem.vlrBruto |  currency :'R$':'symbol':'1.2-2' }}</td>
+                <td>{{orcamentoItem.vlrDesconto | currency :'R$':'symbol':'1.2-2' }}</td>
+                <td>{{orcamentoItem.percDesconto | number : '1.2-2'}}</td>
+                <td>{{orcamentoItem.vlrLiquido | currency :'R$':'symbol':'1.2-2' }}</td>
+                <td>
+                    {{orcamentoItem.largura | number : '1.2-2'  }} x
+                    {{orcamentoItem.comprimento | number : '1.2-2'  }} =
+                    {{orcamentoItem.area | number : '1.2-2'  }}
+                </td>
+                <td>
+                    {{orcamentoItem.espessura | number : '1.2-2'  }}
+                </td>
+
+                <td>
+                    <button pButton pRipple icon="pi pi-check"  Class="p-button-outlined" (click)="doSelecionarItem(orcamentoItem.id)"></button>
+                    <button pButton pRipple icon="pi pi-search" Class="p-button-outlined" (click)="doListarComponente(orcamentoItem.id)"></button>
+                </td>                
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

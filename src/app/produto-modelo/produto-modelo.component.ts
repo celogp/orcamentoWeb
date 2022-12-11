@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { IMAGEM_VAZIA } from '../app.config';
 import { ProdutoModeloEntity } from '../entidades/ProdutoModelo/ProdutoModeloEntity';
 import { utilService } from '../utils/util.servico';
 import { produtoModeloServico } from './produto-modelo.servico';
@@ -7,22 +8,13 @@ import { produtoModeloServico } from './produto-modelo.servico';
 @Component({
   selector: 'app-produto-modelo',
   templateUrl: './produto-modelo.component.html',
-  styleUrls: ['./produto-modelo.component.css'],
-  inputs: ['activeColor', 'baseColor', 'overlayColor']
+  styleUrls: ['./produto-modelo.component.css']
 })
 export class ProdutoModeloComponent implements OnInit {
-
-  dragging: boolean = false;
-  loaded: boolean = false;
-  imageLoaded: boolean = false;
-  imageSrc: any;
-
-  activeColor: string = 'green';
-  baseColor: string = '#ccc';
-  overlayColor: string = 'rgba(255,255,255,0.5)';
-  iconColor = this.overlayColor;
-  borderColor = this.activeColor;
-
+  
+  imageSrc: any = IMAGEM_VAZIA.Image;
+  imagePath: any;
+  messageImagem!: string;  
 
   uploadedFiles: any[] = [];
 
@@ -35,11 +27,6 @@ export class ProdutoModeloComponent implements OnInit {
   nomeProdutoAcabado: string = ""
   nomeProdutoBase: string = ""
 
-  public message!: string;  
-  imagePath: any;
-  imgURL: any;
-  
-  
   constructor(
     private _utilService: utilService,
     private _appComponent: AppComponent,
@@ -50,6 +37,7 @@ export class ProdutoModeloComponent implements OnInit {
   ngOnInit(): void {
     this._appComponent.titleForm = "Produtos Modelos"
     this.produtoModeloEntity.id = 0;
+    console.log('passou no init do produto modelo');
   }
 
   doChangeTela(showGrid: any) {
@@ -72,7 +60,6 @@ export class ProdutoModeloComponent implements OnInit {
   }
 
   doAdicionar(): void {
-    console.log('objeto ', this.produtoModeloEntity);
     this.produtoModeloEntity.id = 0;
     this._produtoModeloServico.doAdicionar(this.produtoModeloEntity)
       .subscribe(
@@ -90,9 +77,7 @@ export class ProdutoModeloComponent implements OnInit {
   }
 
   doAtualizar(): void {
-    //this.produtoModeloEntity.imagem = this.imagePath[0];
-    console.log('chamando api com imagem =>', this.produtoModeloEntity);
-    this._produtoModeloServico.doAtualizar(this.produtoModeloEntity, this.imagePath[0])
+    this._produtoModeloServico.doAtualizar(this.produtoModeloEntity)
       .subscribe(
         (response) => {
           this._utilService.doApresentaMensagens('Atualizou o registro', 'success');
@@ -118,17 +103,23 @@ export class ProdutoModeloComponent implements OnInit {
       );
   }
 
-  doApagarItem(ItemProdutoModeloEntity: ProdutoModeloEntity): void {
+/*   doApagarItem(ItemProdutoModeloEntity: ProdutoModeloEntity): void {
     this.produtoModeloEntity = ItemProdutoModeloEntity;
     this.doApagar();
-  }
+  } */
 
   displayProdutoModelo(_produtoModeloEntity: any) {
     this.produtoModeloEntity = _produtoModeloEntity;
     this.nomeProdutoAcabado = _produtoModeloEntity.produtoAcabado.nome;
     this.nomeProdutoBase = _produtoModeloEntity.produtoBase.nome;
 
-    this.imageSrc = _produtoModeloEntity.imagemsrc
+    //this.imageSrc = _produtoModeloEntity.imagemsrc
+    if (_produtoModeloEntity.produtoModeloImagem != null){
+      this.imageSrc = "data:image/png;base64," + _produtoModeloEntity.produtoModeloImagem.conteudo;
+    }else {
+      //this.imageSrc = "data:image/png;base64," + _produtoModeloEntity.produtoModeloImagem.conteudo;
+      this.imageSrc = '../assets/images/photoEmpty.jfif';
+    }
   }
 
   displayProdutoAcabado(_produtoEntity: any) {
@@ -146,8 +137,6 @@ export class ProdutoModeloComponent implements OnInit {
 
    doSalvarImagem(): void {
 
-    console.log('antes de chamar a classe do serviço => ', this.produtoModeloEntity.id);
-
     this._produtoModeloServico.doSalvarImagem(this.produtoModeloEntity.id, this.imagePath[0])
       .subscribe(
         (response) => {
@@ -162,48 +151,37 @@ export class ProdutoModeloComponent implements OnInit {
       );
   }
 
-  myOnUpload(event:any) {
-    console.log('evento ', event);
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
-        let  url = window.URL.createObjectURL( file );
-        //this.imageSrc = url;
-        this.imageSrc = file.result;
-
-        var reader = new FileReader();
-        this.imagePath = file;
-        reader.readAsDataURL(file); 
-        reader.onload = (_event) => { 
-          this.imgURL = reader.result; 
-          this.imageSrc = reader.result; 
-        }    
-    }
-    //this.imageSrc = this.uploadedFiles[0];
-
-    this._utilService.doApresentaMensagens('File Upload', 'success');
+  doApagarImagem(): void {
+    this._produtoModeloServico.doApagarImagem(this.produtoModeloEntity.id)
+      .subscribe(
+        (response) => {
+          this.imageSrc = IMAGEM_VAZIA.Image;
+          this._utilService.doApresentaMensagens('Apagou a imagem ', 'success');
+        },
+        (errorResponse) => {
+          this._utilService.doApresentaMensagens(errorResponse.error.mensagens, 'error');
+        },
+        () => {
+          //this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Adicionou o registro', life: APP_CONSTANTES.TIMEOUTMSG });
+        }
+      );
   }
 
   preview(files : any) {
     if (files.length === 0)
       return;
- 
     var mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
       this._utilService.doApresentaMensagens('Only images are supported.', 'error');
       return;
     }
- 
     var reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]); 
     reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
-      this.imageSrc = reader.result; 
+      this.imageSrc = reader.result;
+      this.doSalvarImagem();
     }
-    console.log('array ', this.uploadedFiles);
-    console.log('scrImage ', this.imageSrc);
-    console.log('imagePath ', this.imagePath);
-
   }  
 
 }

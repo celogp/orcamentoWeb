@@ -6,7 +6,5 @@ export class ProdutoModeloLst{
     comprimento : number=0;
     altura : number=0;
     espessura : number=0;
-    imagem : string = '';
-    linkImagem: string = '';
     imagemsrc : string = '';
 }

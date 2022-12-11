@@ -29,22 +29,8 @@ export class produtoModeloServico {
     return this.http.post<ObjetoResposta>(this.ProdutoModeloUrl + 'doAdicionar', _entity, this.httpOptions);
   }
 
-  public doAtualizar(_entity: ProdutoModeloEntity, _file : File) {
-    
-     const _httpOptions = {
-      headers:
-        new HttpHeaders(
-          { 'Content-Type': 'multipart/form-data; charset=UTF-8', 'Access-Control-Allow-Origin': '*' }),
-      params: new HttpParams()
-    };
-     console.log('entidade => ', _entity); 
-    const formData = new FormData();
-    formData.append("produtoModeloReq", JSON.stringify(_entity));
-    formData.append("imagem", _file);
-    console.log('formData  => ', formData);
-
-
-    return this.http.put<ObjetoResposta>(this.ProdutoModeloUrl + 'doAtualizarImg',  formData , _httpOptions);
+  public doAtualizar(_entity: ProdutoModeloEntity) {
+    return this.http.put<ObjetoResposta>(this.ProdutoModeloUrl + 'doAtualizar',  _entity, this.httpOptions);
   }
 
   public doApagar(_entity: ProdutoModeloEntity) {
@@ -65,53 +51,20 @@ export class produtoModeloServico {
     return throwError(message);  
   }  
 
-  public doEncodeBase64(strImage : string):string{
-    let encodedData = btoa(strImage);
-    console.log('image 64', encodedData);
-    return encodedData;
-  }
-
-  public doDecodeBase64(strImage : string):string{
-    let decodeData = atob(strImage)
-    console.log('desconvertido ', decodeData);
-    return decodeData;
-  }
-
-
-  public previewFile(event:any) {
-    let input = event.target;
-    console.log('input ', input);
-
-    let preview = document.querySelector('img');
-    let file = document.querySelector('input[type=file]');
-    let reader = new FileReader();
-    let arquivo = input.files[0];
-    console.log('image lida', reader, arquivo);
-
-    reader.addEventListener("load", function () {
-      // convert image file to base64 string
-      //preview.src = reader.result;
-      console.log('converter base 64', reader.result);
-    }, false);
-  
-    if (arquivo) {
-      console.log('converter base 64', reader.readAsDataURL(arquivo));
-      reader.readAsDataURL(arquivo);
-    }
-  }
-  
   public doSalvarImagem(id:number, _file: File) {
-    
     console.log('chamando backend com a imagem botão Save', id, _file);
-
     const formData = new FormData();
     formData.append("id", id.toString());
     formData.append("conteudo", _file);
-
     console.log('FormData =>', formData);
-
     return this.http.post<ObjetoResposta>(this.ProdutoModeloImagemUrl + 'doSalvar',  formData);
+  }
 
+  public doApagarImagem(id:number) {
+    let _params = new HttpParams();
+    _params = _params.append('id', id.toString());
+    this.httpOptions.params = _params;
+    return this.http.delete<ObjetoResposta>(this.ProdutoModeloImagemUrl + 'doApagar', this.httpOptions);
   }
 
 }

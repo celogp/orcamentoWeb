@@ -62,10 +62,8 @@ export class LocalizacaoComponent implements OnInit {
     this._localizacaoServico.doAdicionar(this.localizacaoEntity)
       .subscribe(
         (response  ) => {
-          console.log(response)
           this.localizacaoEntity.id = response.data.id;
           this._utilService.doApresentaMensagens('Adicionou o registro com sucesso.','success');
-          console.log(this.localizacaoEntity)
         },
         (errorResponse) => {
           this._utilService.doApresentaMensagens(errorResponse.error.mensagens,'error');
